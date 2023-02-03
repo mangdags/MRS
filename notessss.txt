@@ -1,0 +1,34 @@
+Account Management(IT)
+-audit trail
+-add employee *maganage employee *assign department
+
+System administration
+-nakikita kung ilang patient at employee
+-nakikita yung audit trail
+
+Front desk
+-gagawin lang is magregister ng pasyente (yung nasa form)
+-view patient
+
+Nurse 
+-acces the patient record
+-get the vital sign 
+-assign ng room (walang magpapakita sa drop down ng ward number if occupied na lahat sa ward na yun)
+-mag assign ng doctor sa pasyente (na for example dr. diana etong pasyente lang ang makikita niya)
+
+
+Doctor
+-Patient asssigned to hime/her
+-diagnosis
+-instruction on the patient
+-request lab test
+-prescription and instruction na ibabato kay nurse kung ano ang gagawin sa pasyente
+-sya yung magdidischarged ng patient
+
+Laboratory
+-gagawin yung lab ng patient
+-(dito ibabato yung result sa patient record
+
+Medical Record
+-nakikita niya lahat ng mga records ng patient
+-print medical record
