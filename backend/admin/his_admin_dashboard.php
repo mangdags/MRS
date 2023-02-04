@@ -205,7 +205,7 @@
                                                     </td>
                                                     <td>
                                                         <a href="his_admin_view_single_employee.php?doc_id=<?php echo $row->doc_id;?>&&doc_number=<?php echo $row->doc_number;?>" class="btn btn-xs btn-primary"><i class="mdi mdi-eye"></i> View</a>
-                                                    </td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                    </td>                                                       
                                                 </tr>
                                             </tbody>
                                             <?php }?>

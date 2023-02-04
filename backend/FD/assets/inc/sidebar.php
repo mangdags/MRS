@@ -27,7 +27,7 @@
                                     <li>
                                         <a href="his_admin_register_patient.php">Register Patient</a>
                                     </li>
-                                   <!-- <li>
+                                   <li>
                                         <a href="his_admin_view_patients.php">View Patients</a>
                                     </li>
                                     <li>
@@ -39,7 +39,7 @@
                                     </li>
                                     <li>
                                         <a href="his_admin_patient_transfer.php">Patient Transfers</a>
-                                    </li>-->
+                                    </li>
                                 </ul>
                             </li>
 

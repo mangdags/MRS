@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2023 at 03:33 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Nov 01, 2022 at 06:03 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `his_accounts` (
   `acc_id` int(200) NOT NULL,
   `acc_name` varchar(200) DEFAULT NULL,
-  `acc_desc` text DEFAULT NULL,
+  `acc_desc` text,
   `acc_type` varchar(200) DEFAULT NULL,
   `acc_number` varchar(200) DEFAULT NULL,
   `acc_amount` varchar(200) DEFAULT NULL
@@ -57,21 +56,15 @@ CREATE TABLE `his_admin` (
   `ad_lname` varchar(200) DEFAULT NULL,
   `ad_email` varchar(200) DEFAULT NULL,
   `ad_pwd` varchar(200) DEFAULT NULL,
-  `ad_dpic` varchar(200) DEFAULT NULL,
-  `status` int(11) NOT NULL
+  `ad_dpic` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `his_admin`
 --
 
-INSERT INTO `his_admin` (`ad_id`, `ad_fname`, `ad_lname`, `ad_email`, `ad_pwd`, `ad_dpic`, `status`) VALUES
-(1, 'System', 'Administrator', 'admin@mail.com', '4c7f5919e957f354d57243d37f223cf31e9e7181', 'doc-icon.png', 1),
-(2, 'Diana Anne', 'Tacdol', 'diana@gmail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', NULL, 5),
-(3, 'Angel Ahne', 'Bellandres', 'medicalrecord@mail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', NULL, 4),
-(4, 'rose', 'marie', 'nurse@gmail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', NULL, 3),
-(5, 'aldrin', 'gascon', 'doctor@gmail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', NULL, 2),
-(6, 'Front', 'Desk', 'frontdesk@gmail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', NULL, 6);
+INSERT INTO `his_admin` (`ad_id`, `ad_fname`, `ad_lname`, `ad_email`, `ad_pwd`, `ad_dpic`) VALUES
+(1, 'System', 'Administrator', 'admin@mail.com', '4c7f5919e957f354d57243d37f223cf31e9e7181', 'doc-icon.png');
 
 -- --------------------------------------------------------
 
@@ -82,42 +75,11 @@ INSERT INTO `his_admin` (`ad_id`, `ad_fname`, `ad_lname`, `ad_email`, `ad_pwd`, 
 CREATE TABLE `his_assets` (
   `asst_id` int(20) NOT NULL,
   `asst_name` varchar(200) DEFAULT NULL,
-  `asst_desc` longtext DEFAULT NULL,
+  `asst_desc` longtext,
   `asst_vendor` varchar(200) DEFAULT NULL,
   `asst_status` varchar(200) DEFAULT NULL,
   `asst_dept` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `his_audit`
---
-
-CREATE TABLE `his_audit` (
-  `id` int(11) NOT NULL,
-  `changes` text NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `date` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `his_audit`
---
-
-INSERT INTO `his_audit` (`id`, `changes`, `user_id`, `date`) VALUES
-(1, 'Delete patient 4', 1, '2023/01/22 03:48:08pm'),
-(2, 'Delete patient 3', 1, '2023/01/22 03:48:11pm'),
-(3, 'Add patient <br>Name: Randall Ragudo', 1, '2023/01/22 03:56:12pm'),
-(4, 'Change patient Ward Number<br> From <br> To 1', 1, '2023/01/22 03:56:38pm'),
-(5, 'Change patient Bed Number<br> From <br> To 5', 1, '2023/01/22 03:56:38pm'),
-(6, 'Change patient Lastname<br> From Cough and Cold<br> To Ragudo', 1, '2023/01/22 03:57:41pm'),
-(7, 'Change patient Bed Number<br> From 5<br> To 6', 2, '2023/01/22 03:58:42pm'),
-(8, 'Delete Prescription of MQU4W', 1, '2023/02/01 11:14:15pm'),
-(9, 'Delete Prescription of PRC93', 1, '2023/02/01 11:14:19pm'),
-(10, 'Add patient <br>Name: Rose Angela', 4, '2023/02/03 11:10:58am'),
-(11, 'Discharged patient Randall Ragudo', 5, '2023/02/03 08:33:30pm'),
-(12, 'Add medical record of Rose headache', 3, '2023/02/03 08:53:32pm');
 
 -- --------------------------------------------------------
 
@@ -136,6 +98,15 @@ CREATE TABLE `his_docs` (
   `doc_dpic` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `his_docs`
+--
+
+INSERT INTO `his_docs` (`doc_id`, `doc_fname`, `doc_lname`, `doc_email`, `doc_pwd`, `doc_dept`, `doc_number`, `doc_dpic`) VALUES
+(5, 'Aletha', 'White', 'aletha@mail.com', 'dce0b27ba675df41e9cc07af80ec59c475810824', 'Laboratory', 'BKTWQ', 'defaultimg.jpg'),
+(6, 'Bryan', 'Arreola', 'bryan@mail.com', '55c3b5386c486feb662a0785f340938f518d547f', 'Surgery | Theatre', 'YDS7L', 'user-default-2-min.png'),
+(12, 'Jessica', 'Spencer', 'jessica@mail.com', 'dce0b27ba675df41e9cc07af80ec59c475810824', 'Accounting', '5VIFT', 'usric.png');
+
 -- --------------------------------------------------------
 
 --
@@ -147,19 +118,19 @@ CREATE TABLE `his_equipments` (
   `eqp_code` varchar(200) DEFAULT NULL,
   `eqp_name` varchar(200) DEFAULT NULL,
   `eqp_vendor` varchar(200) DEFAULT NULL,
-  `eqp_desc` longtext DEFAULT NULL,
+  `eqp_desc` longtext,
   `eqp_dept` varchar(200) DEFAULT NULL,
   `eqp_status` varchar(200) DEFAULT NULL,
-  `eqp_qty` varchar(200) DEFAULT NULL,
-  `status` int(11) NOT NULL COMMENT '0 = deleted\r\n1 = active'
+  `eqp_qty` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `his_equipments`
 --
 
-INSERT INTO `his_equipments` (`eqp_id`, `eqp_code`, `eqp_name`, `eqp_vendor`, `eqp_desc`, `eqp_dept`, `eqp_status`, `eqp_qty`, `status`) VALUES
-(1, '514682709', 'SAMPLE', 'SAMPLE', '<p>sa</p>', 'Laboratory', 'Functioning', '1', 0);
+INSERT INTO `his_equipments` (`eqp_id`, `eqp_code`, `eqp_name`, `eqp_vendor`, `eqp_desc`, `eqp_dept`, `eqp_status`, `eqp_qty`) VALUES
+(2, '178640239', 'TestTubes', 'Casio', '<p>Testtubes are used to perform lab tests--</p>', 'Laboratory', 'Functioning', '700000'),
+(3, '052367981', 'Surgical Robot', 'Nexus', '<p>Surgical Robots aid in surgey process.</p>', 'Surgical | Theatre', 'Functioning', '100');
 
 -- --------------------------------------------------------
 
@@ -172,13 +143,22 @@ CREATE TABLE `his_laboratory` (
   `lab_pat_name` varchar(200) DEFAULT NULL,
   `lab_pat_ailment` varchar(200) DEFAULT NULL,
   `lab_pat_number` varchar(200) DEFAULT NULL,
-  `lab_pat_tests` longtext DEFAULT NULL,
-  `lab_pat_results` longtext DEFAULT NULL,
+  `lab_pat_tests` longtext,
+  `lab_pat_results` longtext,
   `lab_number` varchar(200) DEFAULT NULL,
-  `image` text NOT NULL,
-  `lab_date_rec` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `status` int(1) NOT NULL
+  `lab_date_rec` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `his_laboratory`
+--
+
+INSERT INTO `his_laboratory` (`lab_id`, `lab_pat_name`, `lab_pat_ailment`, `lab_pat_number`, `lab_pat_tests`, `lab_pat_results`, `lab_number`, `lab_date_rec`) VALUES
+(1, 'Lorem Ipsum ', 'Flu', '7EW0L', '<ul><li><a href=\"https://www.medicalnewstoday.com/articles/179211.php\">Non-steroidal anti-inflammatory drugs</a> (NSAIDs) such as <a href=\"https://www.medicalnewstoday.com/articles/161255.php\">aspirin</a> or ibuprofen can help bring a fever down. These are available to purchase over-the-counter or <a target=\"_blank\" href=\"https://amzn.to/2qp3d0b\">online</a>. However, a mild fever may be helping combat the bacterium or virus that is causing the infection. It may not be ideal to bring it down.</li><li>If the fever has been caused by a bacterial infection, the doctor may prescribe an <a href=\"https://www.medicalnewstoday.com/articles/10278.php\">antibiotic</a>.</li><li>If a fever has been caused by a cold, which is caused by a viral infection, NSAIDs may be used to relieve uncomfortable symptoms. Antibiotics have no effect against viruses and will not be prescribed by your doctor for a viral infection.</li></ul>', '<ul><li>If the fever has been caused by a bacterial infection, the doctor may prescribe an <a href=\"https://www.medicalnewstoday.com/articles/10278.php\">antibiotic</a>.</li><li>If a fever has been caused by a cold, which is caused by a viral infection, NSAIDs may be used to relieve uncomfortable symptoms. Antibiotics have no effect against viruses and will not be prescribed by your doctor for a viral infection.</li></ul>', 'K67PL', '2020-01-12 13:32:07'),
+(2, 'Mart Developers', 'Fever', '6P8HJ', '<ul><li>Body temperature</li><li>Blood</li><li>Stool</li><li>Urine</li></ul>', '<ul><li>Body Temperature 67 Degree Celcious(Abnormal)</li><li>Blood - Malaria Bacterial Tested Postive</li><li>Stool - Mucus tested postive</li><li>Urine -Urea Level were 20% higher than normal</li></ul><p><strong>Fever Tested Positive</strong></p>', '9DMN5', '2020-01-12 13:41:07'),
+(3, 'John Doe', 'Malaria', 'RAV6C', '<p><strong>Pain areas: </strong>in the abdomen or muscles</p><p><strong>Whole body: </strong>chills, fatigue, fever, night sweats, shivering, or sweating</p><p><strong>Gastrointestinal: </strong>diarrhoea, nausea, or vomiting</p><p><strong>Also common: </strong>fast heart rate, headache, mental confusion, or pallor</p>', '<p><strong>Pain areas: </strong>in the abdomen or muscles -Tested Positive</p><p><strong>Whole body: </strong>chills, fatigue, fever, night sweats, shivering, or sweating - Tested Positive</p><p><strong>Gastrointestinal: </strong>diarrhoea, nausea, or vomiting - Tested Positive</p><p>&nbsp;</p>', '90ZNX', '2020-01-13 12:31:48'),
+(4, 'Cynthia Connolly', 'Demo Test', '3Z14K', '<p>demo demo demo demo</p>', '<p>54545</p>', 'G0VZU', '2022-10-20 17:48:05'),
+(5, 'Christine Moore', 'Demo Test', '4TLG0', '<ol><li>Test One</li><li>Test Two</li><li>Test Three</li><li>Test Four</li><li>Test Five</li></ol>', '<ol><li>Result One</li><li>Result Two</li><li>Result Three</li></ol>', 'RA4UM', '2022-10-22 11:01:11');
 
 -- --------------------------------------------------------
 
@@ -194,17 +174,19 @@ CREATE TABLE `his_medical_records` (
   `mdr_pat_age` varchar(200) DEFAULT NULL,
   `mdr_pat_ailment` varchar(200) DEFAULT NULL,
   `mdr_pat_number` varchar(200) DEFAULT NULL,
-  `mdr_pat_prescr` longtext DEFAULT NULL,
-  `mdr_date_rec` timestamp(4) NOT NULL DEFAULT current_timestamp(4) ON UPDATE current_timestamp(4),
-  `status` int(11) NOT NULL COMMENT '0 = delete\r\n1 = active'
+  `mdr_pat_prescr` longtext,
+  `mdr_date_rec` timestamp(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4) ON UPDATE CURRENT_TIMESTAMP(4)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `his_medical_records`
 --
 
-INSERT INTO `his_medical_records` (`mdr_id`, `mdr_number`, `mdr_pat_name`, `mdr_pat_adr`, `mdr_pat_age`, `mdr_pat_ailment`, `mdr_pat_number`, `mdr_pat_prescr`, `mdr_date_rec`, `status`) VALUES
-(4, '51AD2', 'Rose headache', 'Santa Catalina', '11', 'headache', '5GU9A', '', '2023-02-03 12:53:32.7349', 1);
+INSERT INTO `his_medical_records` (`mdr_id`, `mdr_number`, `mdr_pat_name`, `mdr_pat_adr`, `mdr_pat_age`, `mdr_pat_ailment`, `mdr_pat_number`, `mdr_pat_prescr`, `mdr_date_rec`) VALUES
+(1, 'ZNXI4', 'John Doe', '12 900 Los Angeles', '35', 'Malaria', 'RAV6C', '<ul><li>Combination of atovaquone and proguanil (Malarone)</li><li>Quinine sulfate (Qualaquin) with doxycycline (Vibramycin, Monodox, others)</li><li>Mefloquine.</li><li>Primaquine phosphate.</li></ul>', '2020-01-11 15:03:05.9839'),
+(2, 'MIA9P', 'Cynthia Connolly', '9 Hill Haven Drive', '22', 'Demo Test', '3Z14K', NULL, '2022-10-18 17:07:46.7306'),
+(3, 'F1ZHQ', 'Michael White', '60 Radford Street', '30', 'Demo Test', 'DCRI8', NULL, '2022-10-18 17:08:35.7938'),
+(4, 'ZLN0Q', 'Lawrence Bischof', '82 Bryan Street', '32', 'Demo Test', 'ISL1E', '<ol><li>sample</li><li>sampl</li><li>sample</li><li>sample</li></ol>', '2022-10-20 17:22:15.7034');
 
 -- --------------------------------------------------------
 
@@ -220,23 +202,23 @@ CREATE TABLE `his_patients` (
   `pat_age` varchar(200) DEFAULT NULL,
   `pat_number` varchar(200) DEFAULT NULL,
   `pat_addr` varchar(200) DEFAULT NULL,
-  `wardnumber` varchar(50) NOT NULL,
-  `bednumber` varchar(50) NOT NULL,
   `pat_phone` varchar(200) DEFAULT NULL,
   `pat_type` varchar(200) DEFAULT NULL,
-  `pat_date_joined` varchar(50) DEFAULT NULL,
+  `pat_date_joined` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `pat_ailment` varchar(200) DEFAULT NULL,
-  `pat_discharge_status` varchar(200) DEFAULT NULL,
-  `status` int(11) NOT NULL COMMENT '0 = delete\r\n1 = active'
+  `pat_discharge_status` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `his_patients`
 --
 
-INSERT INTO `his_patients` (`pat_id`, `pat_fname`, `pat_lname`, `pat_dob`, `pat_age`, `pat_number`, `pat_addr`, `wardnumber`, `bednumber`, `pat_phone`, `pat_type`, `pat_date_joined`, `pat_ailment`, `pat_discharge_status`, `status`) VALUES
-(5, 'Randall', 'Ragudo', '11/12/2011', '11', 'GI6U7', 'Santa Catalina', '1', '6', '09066752664', 'InPatient', '2023/01/22 03:56:12pm', 'Cough and Cold', 'Discharged', 1),
-(6, 'Rose', 'headache', '11/12/2011', '11', '5GU9A', 'Santa Catalina', '', '', '09123456789', 'InPatient', '2023/02/03 11:10:58am', 'headache', '', 1);
+INSERT INTO `his_patients` (`pat_id`, `pat_fname`, `pat_lname`, `pat_dob`, `pat_age`, `pat_number`, `pat_addr`, `pat_phone`, `pat_type`, `pat_date_joined`, `pat_ailment`, `pat_discharge_status`) VALUES
+(8, 'Michael', 'White', '02/02/1992', '30', 'DCRI8', '60 Radford Street', '1458887854', 'InPatient', '2022-10-18 16:28:51.469431', 'Demo Test', NULL),
+(9, 'Lawrence', 'Bischof', '01/19/1990', '32', 'ISL1E', '82 Bryan Street', '7412225698', 'InPatient', '2022-10-18 16:53:26.210951', 'Demo Test', NULL),
+(10, 'Cynthia', 'Connolly', '10/11/2000', '22', '3Z14K', '9 Hill Haven Drive', '1478885458', 'InPatient', '2022-10-18 16:54:53.104490', 'Demo Test', NULL),
+(11, 'Helen', 'Macdougall', '01/01/1980', '42', 'KU8W4', '28 Holly Street', '1458889655', 'OutPatient', '2022-10-20 17:26:45.256878', 'Test Test', NULL),
+(12, 'Christine', 'Moore', '11/06/1994', '28', '4TLG0', '117 Bleecker Street', '7412569698', 'InPatient', '2022-10-22 10:38:30.937516', 'Demo Test', NULL);
 
 -- --------------------------------------------------------
 
@@ -253,6 +235,13 @@ CREATE TABLE `his_patient_transfers` (
   `t_status` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `his_patient_transfers`
+--
+
+INSERT INTO `his_patient_transfers` (`t_id`, `t_hospital`, `t_date`, `t_pat_name`, `t_pat_number`, `t_status`) VALUES
+(1, 'Kenyatta National Hospital', '2020-01-11', 'Mart Developers', '9KXPM', 'Success');
+
 -- --------------------------------------------------------
 
 --
@@ -266,9 +255,9 @@ CREATE TABLE `his_payrolls` (
   `pay_doc_number` varchar(200) DEFAULT NULL,
   `pay_doc_email` varchar(200) DEFAULT NULL,
   `pay_emp_salary` varchar(200) DEFAULT NULL,
-  `pay_date_generated` timestamp(4) NOT NULL DEFAULT current_timestamp(4) ON UPDATE current_timestamp(4),
+  `pay_date_generated` timestamp(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4) ON UPDATE CURRENT_TIMESTAMP(4),
   `pay_status` varchar(200) DEFAULT NULL,
-  `pay_descr` longtext DEFAULT NULL
+  `pay_descr` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -290,7 +279,7 @@ CREATE TABLE `his_pharmaceuticals` (
   `phar_id` int(20) NOT NULL,
   `phar_name` varchar(200) DEFAULT NULL,
   `phar_bcode` varchar(200) DEFAULT NULL,
-  `phar_desc` longtext DEFAULT NULL,
+  `phar_desc` longtext,
   `phar_qty` varchar(200) DEFAULT NULL,
   `phar_cat` varchar(200) DEFAULT NULL,
   `phar_vendor` varchar(200) DEFAULT NULL
@@ -315,7 +304,7 @@ CREATE TABLE `his_pharmaceuticals_categories` (
   `pharm_cat_id` int(20) NOT NULL,
   `pharm_cat_name` varchar(200) DEFAULT NULL,
   `pharm_cat_vendor` varchar(200) DEFAULT NULL,
-  `pharm_cat_desc` longtext DEFAULT NULL
+  `pharm_cat_desc` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -341,11 +330,20 @@ CREATE TABLE `his_prescriptions` (
   `pres_number` varchar(200) DEFAULT NULL,
   `pres_pat_addr` varchar(200) DEFAULT NULL,
   `pres_pat_type` varchar(200) DEFAULT NULL,
-  `pres_date` timestamp(4) NOT NULL DEFAULT current_timestamp(4) ON UPDATE current_timestamp(4),
+  `pres_date` timestamp(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4) ON UPDATE CURRENT_TIMESTAMP(4),
   `pres_pat_ailment` varchar(200) DEFAULT NULL,
-  `pres_ins` longtext DEFAULT NULL,
-  `status` int(11) NOT NULL COMMENT '0 = deleted\r\n1 = active'
+  `pres_ins` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `his_prescriptions`
+--
+
+INSERT INTO `his_prescriptions` (`pres_id`, `pres_pat_name`, `pres_pat_age`, `pres_pat_number`, `pres_number`, `pres_pat_addr`, `pres_pat_type`, `pres_date`, `pres_pat_ailment`, `pres_ins`) VALUES
+(3, 'Mart Developers', '23', '6P8HJ', 'J9DC6', '127001 LocalHost', 'InPatient', '2020-01-11 12:32:39.6963', 'Fever', '<ul><li><a href=\"https://www.medicalnewstoday.com/articles/179211.php\">Non-steroidal anti-inflammatory drugs</a> (NSAIDs) such as <a href=\"https://www.medicalnewstoday.com/articles/161255.php\">aspirin</a> or ibuprofen can help bring a fever down. These are available to purchase over-the-counter or <a target=\"_blank\" href=\"https://amzn.to/2qp3d0b\">online</a>. However, a mild fever may be helping combat the bacterium or virus that is causing the infection. It may not be ideal to bring it down.</li><li>If the fever has been caused by a bacterial infection, the doctor may prescribe an <a href=\"https://www.medicalnewstoday.com/articles/10278.php\">antibiotic</a>.</li><li>If a fever has been caused by a cold, which is caused by a viral infection, NSAIDs may be used to relieve uncomfortable symptoms. Antibiotics have no effect against viruses and will not be prescribed by your doctor for a viral infection.</li></ul>'),
+(4, 'John Doe', '30', 'RAV6C', 'HZQ8J', '12 900 NYE', 'OutPatient', '2020-01-11 13:08:46.7368', 'Malaria', '<ul><li>Combination of atovaquone and proguanil (Malarone)</li><li>Quinine sulfate (Qualaquin) with doxycycline (Vibramycin, Monodox, others)</li><li>Mefloquine.</li><li>Primaquine phosphate.</li></ul>'),
+(5, 'Lorem Ipsum', '10', '7EW0L', 'HQC3D', '12 9001 Machakos', 'OutPatient', '2020-01-13 12:19:30.3702', 'Flu', '<ul><li><a href=\"https://www.google.com/search?client=firefox-b-e&amp;sxsrf=ACYBGNRW3vlJoag6iJInWVOTtTG_HUTedA:1578917913108&amp;q=flu+decongestant&amp;stick=H4sIAAAAAAAAAOMQFeLQz9U3SK5MTlbiBLGMktNzcnYxMRosYhVIyylVSElNzs9LTy0uScwrAQBMMnd5LgAAAA&amp;sa=X&amp;ved=2ahUKEwjRhNzKx4DnAhUcBGMBHYs1A24Q0EAwFnoECAwQHw\">Decongestant</a></li><li>Relieves nasal congestion, swelling and runny nose.</li><li><a href=\"https://www.google.com/search?client=firefox-b-e&amp;sxsrf=ACYBGNRW3vlJoag6iJInWVOTtTG_HUTedA:1578917913108&amp;q=flu+cough+medicine&amp;stick=H4sIAAAAAAAAAOMQFeLQz9U3SK5MTlbiBLEM89IsLHYxMRosYhVKyylVSM4vTc9QyE1NyUzOzEsFAA_gu9IwAAAA&amp;sa=X&amp;ved=2ahUKEwjRhNzKx4DnAhUcBGMBHYs1A24Q0EAwFnoECAwQIA\">Cough medicine</a></li><li>Blocks the cough reflex. Some may thin and loosen mucus, making it easier to clear from the airways.</li><li><a href=\"https://www.google.com/search?client=firefox-b-e&amp;sxsrf=ACYBGNRW3vlJoag6iJInWVOTtTG_HUTedA:1578917913108&amp;q=flu+nonsteroidal+anti-inflammatory+drug&amp;stick=H4sIAAAAAAAAAOMQFeLQz9U3SK5MTlYCs0yzCit3MTEaLGJVT8spVcjLzysuSS3Kz0xJzFFIzCvJ1M3MS8tJzM1NLMkvqlRIKSpNBwByUiYhRAAAAA&amp;sa=X&amp;ved=2ahUKEwjRhNzKx4DnAhUcBGMBHYs1A24Q0EAwFnoECAwQIQ\">Nonsteroidal anti-inflammatory drug</a></li><li>Relieves pain, decreases inflammation and reduces fever.</li><li><a href=\"https://www.google.com/search?client=firefox-b-e&amp;sxsrf=ACYBGNRW3vlJoag6iJInWVOTtTG_HUTedA:1578917913108&amp;q=flu+analgesic&amp;stick=H4sIAAAAAAAAAOMQFeLQz9U3SK5MTlZiB7EqDSx3MTEaLGLlTcspVUjMS8xJTy3OTAYAbecS9ikAAAA&amp;sa=X&amp;ved=2ahUKEwjRhNzKx4DnAhUcBGMBHYs1A24Q0EAwFnoECAwQIg\">Analgesic</a></li><li>Relieves pain.</li><li><a href=\"https://www.google.com/search?client=firefox-b-e&amp;sxsrf=ACYBGNRW3vlJoag6iJInWVOTtTG_HUTedA:1578917913108&amp;q=flu+antiviral+drug&amp;stick=H4sIAAAAAAAAAOMQFeLQz9U3SK5MTlYCs1KMC0x2MTEaLGIVSsspVUjMK8ksyyxKzFFIKSpNBwDBFxlOLwAAAA&amp;sa=X&amp;ved=2ahUKEwjRhNzKx4DnAhUcBGMBHYs1A24Q0EAwFnoECAwQIw\">Antiviral drug</a></li><li>Reduces viruses&#39; ability to replicate.</li></ul>'),
+(6, 'Christine Moore', '28', '4TLG0', '09Y2P', '117 Bleecker Street', 'InPatient', '2022-10-22 10:57:10.7496', 'Demo Test', '<ol><li>This is a demo prescription.</li><li>This is a second demo prescription.</li><li>And this one&#39;s third!</li></ol>');
 
 -- --------------------------------------------------------
 
@@ -371,7 +369,7 @@ CREATE TABLE `his_surgery` (
   `s_pat_number` varchar(200) DEFAULT NULL,
   `s_pat_name` varchar(200) DEFAULT NULL,
   `s_pat_ailment` varchar(200) DEFAULT NULL,
-  `s_pat_date` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `s_pat_date` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `s_pat_status` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -398,7 +396,7 @@ CREATE TABLE `his_vendor` (
   `v_mobile` varchar(200) DEFAULT NULL,
   `v_email` varchar(200) DEFAULT NULL,
   `v_phone` varchar(200) DEFAULT NULL,
-  `v_desc` longtext DEFAULT NULL
+  `v_desc` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -422,7 +420,7 @@ CREATE TABLE `his_vitals` (
   `vit_heartpulse` varchar(200) DEFAULT NULL,
   `vit_resprate` varchar(200) DEFAULT NULL,
   `vit_bloodpress` varchar(200) DEFAULT NULL,
-  `vit_daterec` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6)
+  `vit_daterec` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -431,38 +429,9 @@ CREATE TABLE `his_vitals` (
 
 INSERT INTO `his_vitals` (`vit_id`, `vit_number`, `vit_pat_number`, `vit_bodytemp`, `vit_heartpulse`, `vit_resprate`, `vit_bloodpress`, `vit_daterec`) VALUES
 (3, '1KB9V', '3Z14K', '38', '77', '12', '90/60', '2022-10-18 17:10:16.904915'),
-(4, 'ELYOM', '2', '38', '88', '12', '110/80', '2022-11-19 04:23:18.442836'),
+(4, 'ELYOM', 'BKTWQ', '38', '88', '12', '110/80', '2022-10-18 01:49:55.814783'),
 (5, 'AL0J8', 'YDS7L', '36', '72', '15', '90/60', '2022-10-18 17:42:17.500662'),
-(6, 'MS2OJ', '4TLG0', '37', '70', '15', '120/80', '2022-10-22 11:01:52.148658'),
-(7, 'MVOJ4', '3', '37', '70', '15', '120/80', '2022-11-19 05:23:23.101122'),
-(8, '74TUK', '3Z14K', '37', '123', '123', '123', '2022-11-19 05:24:46.829638'),
-(9, 'C5U2A', 'ISL1E', '37', '70', '15', '120/80', '2022-11-20 05:13:07.328090'),
-(10, 'SBTPC', 'ISL1E', '37', '70', '123', '120/80', '2023-01-19 16:56:24.362868'),
-(11, 'EMYTF', '3', '37', '70', '15', '120/80', '2023-01-19 16:58:47.843185'),
-(12, '0SV8P', 'SA7ZJ', '37', '70', '123', '120/80', '2023-01-19 17:57:20.048376'),
-(13, 'RH3T6', '3', '37', '123', '15', '120/80', '2023-01-19 17:57:36.680236');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbluser`
---
-
-CREATE TABLE `tbluser` (
-  `id` int(11) NOT NULL,
-  `department` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbluser`
---
-
-INSERT INTO `tbluser` (`id`, `department`) VALUES
-(1, 'Admin'),
-(2, 'Doctor'),
-(3, 'Nurse'),
-(4, 'MEDICAL RECORDS'),
-(5, 'LABORATORY');
+(6, 'MS2OJ', '4TLG0', '37', '70', '15', '120/80', '2022-10-22 11:01:52.148658');
 
 --
 -- Indexes for dumped tables
@@ -485,12 +454,6 @@ ALTER TABLE `his_admin`
 --
 ALTER TABLE `his_assets`
   ADD PRIMARY KEY (`asst_id`);
-
---
--- Indexes for table `his_audit`
---
-ALTER TABLE `his_audit`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `his_docs`
@@ -577,12 +540,6 @@ ALTER TABLE `his_vitals`
   ADD PRIMARY KEY (`vit_id`);
 
 --
--- Indexes for table `tbluser`
---
-ALTER TABLE `tbluser`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -591,116 +548,86 @@ ALTER TABLE `tbluser`
 --
 ALTER TABLE `his_accounts`
   MODIFY `acc_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `his_admin`
 --
 ALTER TABLE `his_admin`
-  MODIFY `ad_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `ad_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `his_assets`
 --
 ALTER TABLE `his_assets`
   MODIFY `asst_id` int(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `his_audit`
---
-ALTER TABLE `his_audit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `his_docs`
 --
 ALTER TABLE `his_docs`
   MODIFY `doc_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `his_equipments`
 --
 ALTER TABLE `his_equipments`
-  MODIFY `eqp_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `eqp_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `his_laboratory`
 --
 ALTER TABLE `his_laboratory`
-  MODIFY `lab_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `lab_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `his_medical_records`
 --
 ALTER TABLE `his_medical_records`
   MODIFY `mdr_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `his_patients`
 --
 ALTER TABLE `his_patients`
-  MODIFY `pat_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `pat_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `his_patient_transfers`
 --
 ALTER TABLE `his_patient_transfers`
-  MODIFY `t_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `t_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `his_payrolls`
 --
 ALTER TABLE `his_payrolls`
   MODIFY `pay_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `his_pharmaceuticals`
 --
 ALTER TABLE `his_pharmaceuticals`
   MODIFY `phar_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `his_pharmaceuticals_categories`
 --
 ALTER TABLE `his_pharmaceuticals_categories`
   MODIFY `pharm_cat_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `his_prescriptions`
 --
 ALTER TABLE `his_prescriptions`
-  MODIFY `pres_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `pres_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `his_pwdresets`
 --
 ALTER TABLE `his_pwdresets`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `his_surgery`
 --
 ALTER TABLE `his_surgery`
   MODIFY `s_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `his_vendor`
 --
 ALTER TABLE `his_vendor`
   MODIFY `v_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `his_vitals`
 --
 ALTER TABLE `his_vitals`
-  MODIFY `vit_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `tbluser`
---
-ALTER TABLE `tbluser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-COMMIT;
-
+  MODIFY `vit_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
