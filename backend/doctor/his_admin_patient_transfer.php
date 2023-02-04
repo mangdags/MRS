@@ -110,7 +110,7 @@
                                                 *get details of allpatients
                                                 *
                                             */
-                                                $ret="SELECT * FROM  his_patients WHERE  pat_type = 'InPatient' "; 
+                                                $ret="SELECT * FROM  his_patients WHERE  pat_type = 'InPatient' AND status = 1 ORDER BY pat_id DESC"; 
                                                
                                                 $stmt= $mysqli->prepare($ret) ;
                                                 $stmt->execute() ;//ok

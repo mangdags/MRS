@@ -31,6 +31,10 @@
                 $stmt1 = $mysqli->prepare($query1);
                 $stmt1->execute();
 				$success = "Patient Transferred";
+
+                $qry = "UPDATE his_patients SET `status` = '0' WHERE pat_number = '$t_pat_number'";
+                $stmt = $mysqli->prepare($qry);
+                $stmt->execute();
 			}
 			else {
 				$err = "Please Try Again Or Try Later";

@@ -50,7 +50,7 @@
             $stmt->execute();
 
             /*
-            *Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
+            *Use Sweet Alerts Instead Of Javascript Alerts
             *echo"<script>alert('Successfully Created Account Proceed To Log In ');</script>";
             */ 
             //declare a varible which will be passed to alert function
@@ -240,7 +240,7 @@
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="form-row">
+                                            <!-- <div class="form-row">
                                                 <div class="form-group col-md-4">
                                                     <label for="condition_arrival" class="col-form-label">Condition on Arrival</label>
                                                     <select id="condition_arrival" required="required" name="condition_arrival" class="form-control">
@@ -361,7 +361,7 @@
                                                         <option value="OutPatient">OutPatient</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group col-md-2" style="display:none">
                                                 <?php 

@@ -116,7 +116,7 @@
                                                 *get details of allpatients
                                                 *
                                             */
-                                                $ret="SELECT * FROM  his_prescriptions where status = 1 ORDER BY RAND() "; 
+                                                $ret="SELECT * FROM  his_prescriptions where status = 1"; 
                                                 //sql code to get to ten docs  randomly
                                                 $stmt= $mysqli->prepare($ret) ;
                                                 $stmt->execute() ;//ok
@@ -136,6 +136,7 @@
                                                     <td><?php echo $row->pres_pat_age;?> Years</td>
                                                     <td><?php echo $row->pres_pat_type;?></td>
                                                     <td>
+                                                    <!-- http://localhost/MRS/backend/doctor/his_admin_view_single_pres.php?pres_number=2DU1K&&pres_id=4 -->
                                                         <a href="his_admin_view_single_pres.php?pres_number=<?php echo $row->pres_number;?>" class="badge badge-success"><i class="fas fa-eye"></i> View</a>
                                                         <a href="his_admin_upate_single_pres.php?pres_number=<?php echo $row->pres_number;?>" class="badge badge-warning"><i class="fas fa-eye-dropper "></i> Update</a>
                                                         <a href="his_admin_manage_presc.php?delete_pres_number=<?php echo $row->pres_number;?>" class="badge badge-danger"><i class=" fas fa-trash-alt "></i> Delete</a>

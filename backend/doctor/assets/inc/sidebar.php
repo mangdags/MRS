@@ -25,9 +25,6 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="his_admin_register_patient.php">Register Patient</a>
-                                    </li>
-                                    <li>
                                         <a href="his_admin_view_patients.php">View Patients</a>
                                     </li>
                                     <li>
@@ -97,12 +94,12 @@
                                     <li>
                                         <a href="his_admin_patient_lab_result.php">Patient Lab Results</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="his_admin_patient_lab_vitals.php">Patient Vitals</a>
                                     </li>
                                     <li>
                                         <a href="his_admin_employee_lab_vitals.php">Employee Vitals</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="his_admin_lab_report.php">Lab Reports</a>
                                     </li>

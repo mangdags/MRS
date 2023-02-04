@@ -21,29 +21,31 @@
             
             $pat_discharge_status = $_POST['pat_discharge_status'];
             //sql to insert captured values
-			$query="UPDATE  his_patients  SET pat_discharge_status=?  WHERE pat_id = ?";
+			$query="UPDATE  his_patients  SET pat_discharge_status=?, pat_type='OutPatient'  WHERE pat_id = ?";
 			$stmt = $mysqli->prepare($query);
-			$rc=$stmt->bind_param('si', $pat_discharge_status, $pat_id);
+			$rc=$stmt->bind_param('si', $pat_discharge_status,  $pat_id);
 			$stmt->execute();
+
 			/*
 			*Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
 			*echo"<script>alert('Successfully Created Account Proceed To Log In ');</script>";
 			*/ 
 			//declare a varible which will be passed to alert function
-			if($stmt)
-			{
+			if($stmt) {
                 $id_user = $_SESSION['ad_id'];
-                $changes = 'Discharged patient '.$_POST['pat_fname'].' '.$_POST['pat_lname'].'';
+                $changes = 'Discharged patient '.$_POST['pat_fname'].' '.$_POST['pat_lname'].' Set type to OutPatient';
                 $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id_user','$date')";
                 $stmt = $mysqli->prepare($query);
                 $stmt->execute();
 				$success = "Patient Discharged";
+
+                echo '<script> 
+                        alert("Patient has been discharged!");
+                        window.location.href = "his_admin_discharge_patient.php"; </script>';
 			}
 			else {
 				$err = "Please Try Again Or Try Later";
 			}
-			
-			
 		}
 ?>
 <!--End Server Side-->

@@ -92,7 +92,7 @@
                                                 *get details of allpatients
                                                 *
                                             */
-                                                $ret="SELECT * FROM  his_prescriptions ORDER BY RAND() "; 
+                                                $ret="SELECT * FROM  his_prescriptions WHERE status = 1"; 
                                                 //sql code to get to ten docs  randomly
                                                 $stmt= $mysqli->prepare($ret) ;
                                                 $stmt->execute() ;//ok

@@ -24,9 +24,9 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li>
+                                    <!-- <li>
                                         <a href="his_admin_register_patient.php">Register Patient</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="his_admin_view_patients.php">View Patients</a>
                                     </li>
