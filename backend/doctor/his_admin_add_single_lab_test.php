@@ -93,7 +93,7 @@
                                                 <li class="breadcrumb-item active">Add Lab Test</li>
                                             </ol>
                                         </div>
-                                        <h4 class="page-title">Add Lab Test</h4>
+                                        <h4 class="page-title">Request Lab Test</h4>
                                     </div>
                                 </div>
                             </div>     
@@ -144,16 +144,16 @@
                                                         <input type="text" name="lab_number" value="<?php echo $pres_no;?>" class="form-control" id="inputZip">
                                                     </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <!-- <div class="form-group col-md-6">
                                                     <label for="inputCity" class="col-form-label">Profile Picture</label>
                                                     <input required="required"  type="file" name="doc_dpic" class="btn btn-success form-control"  id="inputCity">
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group">
                                                         <label for="inputAddress" class="col-form-label">Laboratory Tests</label>
                                                         <textarea required="required"  type="text" class="form-control" name="lab_pat_tests" id="editor"></textarea>
                                                 </div>
 
-                                                <button type="submit" name="add_patient_lab_test" class="ladda-button btn btn-success" data-style="expand-right">Add Laboratory Test</button>
+                                                <button type="submit" name="add_patient_lab_test" class="ladda-button btn btn-success" data-style="expand-right">Add Request</button>
 
                                             </form>
                                             <!--End Patient Form-->

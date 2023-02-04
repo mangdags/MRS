@@ -6,19 +6,13 @@
 		{
             date_default_timezone_set('Asia/Manila');
             $date = date("Y/m/d h:i:sa");
-			$pat_fname=$_POST['pat_fname'];
-			$pat_lname=$_POST['pat_lname'];
 			$pat_number=$_GET['pat_id'];
-            $pat_phone=$_POST['pat_phone'];
-            $pat_type=$_POST['pat_type'];
-            $pat_addr=$_POST['pat_addr'];
-            $pat_age = $_POST['pat_age'];
-            $pat_dob = $_POST['pat_dob'];
-            $pat_ailment = $_POST['pat_ailment'];
-            $pat_ward = $_POST['pat_ward'];
-            $pat_bed = $_POST['pat_bed'];
+            $pat_diagnosis = $_POST['pat_diagnosis'];
+            $pat_instruction = $_POST['pat_instruction'];
+            $nurse_instruction = $_POST['nurse_instruction'];
+
             //sql to insert captured values
-			$query="UPDATE  his_patients  SET pat_fname='$pat_fname', pat_lname='$pat_lname', pat_age='$pat_age', pat_dob='$pat_dob',  pat_phone='$pat_phone', pat_type='$pat_type', pat_addr='$pat_addr', pat_ailment='$pat_ailment', wardnumber = '$pat_ward', bednumber = '$pat_bed' WHERE pat_id ='$pat_number'";
+			$query="UPDATE  his_patients SET pat_diagnosis ='$pat_diagnosis', pat_instruction='$pat_instruction', nurse_instruction = '$nurse_instruction' WHERE pat_id ='$pat_number'";
 			$stmt = $mysqli->prepare($query);
 			$stmt->execute();
 			/*
@@ -29,57 +23,8 @@
 			if($stmt)
 			{
                 $id = $_SESSION['ad_id'];
-                
-                if ($pat_fname != $_POST['fname']) {
-                    $changes = 'Change patient Firstname<br> From '.$_POST['fname'].'<br> To '.$pat_fname.'';
-                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->execute();
-                }
-                if ($pat_lname != $_POST['lname']) {
-                    $changes = 'Change patient Lastname<br> From '.$_POST['lname'].'<br> To '.$pat_lname.'';
-                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->execute();
-                }
-                if ($pat_dob != $_POST['dob']) {
-                    $changes = 'Change patient Date of Birth<br> From '.$_POST['dob'].'<br> To '.$pat_dob.'';
-                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->execute();
-                }
-                if ($pat_age != $_POST['age']) {
-                    $changes = 'Change patient Age<br>From '.$_POST['age'].'<br> To '.$pat_age.'';
-                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->execute();
-                }
-                if ($pat_addr != $_POST['address']) {
-                    $changes = 'Change patient address<br>From '.$_POST['address'].'<br> To '.$pat_addr.'';
-                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->execute();
-                }
-                if ($pat_ward != $_POST['ward']) {
-                    $changes = 'Change patient Ward Number<br> From '.$_POST['ward'].'<br> To '.$pat_ward.'';
-                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->execute();
-                }
-                if ($pat_bed != $_POST['bed']) {
-                    $changes = 'Change patient Bed Number<br> From '.$_POST['bed'].'<br> To '.$pat_bed.'';
-                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->execute();
-                }
-                if ($pat_phone != $_POST['mobile']) {
-                    $changes = 'Change patient Bed phone number<br>From '.$_POST['mobile'].'<br> To '.$pat_phone.'';
-                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->execute();
-                }
-                if ($pat_ailment != $_POST['ailment']) {
-                    $changes = 'Change patient Bed ailment<br>From '.$_POST['ailment'].'<br> To '.$pat_ailment.'';
+                if ($pat_diagnosis != $_POST['pat_diagnosis']) {
+                    $changes = 'Change patient diagnosis<br>From '.$_POST['pat_diagnosis'].'<br> To '.$pat_diagnosis.'';
                     $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
                     $stmt = $mysqli->prepare($query);
                     $stmt->execute();
@@ -156,75 +101,64 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="header-title">Fill all fields</h4>
                                         <!--Add Patient Form-->
                                         <form method="post">
                                             <input type="hidden" name="fname" value="<?php echo $row->pat_fname;?>">
+                                            <input type="hidden" name="mname" value="<?php echo $row->mname;?>">
                                             <input type="hidden" name="lname" value="<?php echo $row->pat_lname;?>">
                                             <input type="hidden" name="dob" value="<?php echo $row->pat_dob;?>">
                                             <input type="hidden" name="age" value="<?php echo $row->pat_age;?>">
                                             <input type="hidden" name="address" value="<?php echo $row->pat_addr;?>">
                                             <input type="hidden" name="ward" value="<?php echo $row->wardnumber;?>">
                                             <input type="hidden" name="bed" value="<?php echo $row->bednumber;?>">
-                                            <input type="hidden" name="mobile" value="<?php echo $row->pat_phone;?>">
                                             <input type="hidden" name="ailment" value="<?php echo $row->pat_ailment;?>">
                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
                                                     <label for="inputEmail4" class="col-form-label">First Name</label>
-                                                    <input type="text" required="required" value="<?php echo $row->pat_fname;?>" name="pat_fname" class="form-control" id="inputEmail4" placeholder="Patient's First Name">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputPassword4" class="col-form-label">Last Name</label>
-                                                    <input required="required" type="text" value="<?php echo $row->pat_lname;?>" name="pat_lname" class="form-control"  id="inputPassword4" placeholder="Patient`s Last Name">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputEmail4" class="col-form-label">Date Of Birth</label>
-                                                    <input type="text" required="required" value="<?php echo $row->pat_dob;?>" name="pat_dob" class="form-control" id="inputEmail4" placeholder="DD/MM/YYYY">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputPassword4" class="col-form-label">Age</label>
-                                                    <input required="required" type="text" value="<?php echo $row->pat_age;?>" name="pat_age" class="form-control"  id="inputPassword4" placeholder="Patient`s Age">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputAddress" class="col-form-label">Address</label>
-                                                    <input required="required" type="text" value="<?php echo $row->pat_addr;?>" class="form-control" name="pat_addr" id="inputAddress" placeholder="Patient's Addresss">
+                                                    <input type="text" required="required" value="<?php echo $row->pat_fname;?>" name="pat_fname" class="form-control" id="inputEmail4" placeholder="Patient's First Name" readonly>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="inputWard" class="col-form-label">Ward Number</label>
-                                                    <input type="number" value="<?php echo $row->wardnumber;?>" class="form-control" name="pat_ward" id="inputWard" placeholder="Patient's Ward Number">
+                                                    <label for="inputPassword4" class="col-form-label">Middle Name</label>
+                                                    <input required="required" type="text" value="<?php echo $row->pat_mname;?>" name="pat_mname" class="form-control"  id="inputPassword4" placeholder="Patient`s Middle Name" readonly>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputPassword4" class="col-form-label">Last Name</label>
+                                                    <input required="required" type="text" value="<?php echo $row->pat_lname;?>" name="pat_lname" class="form-control"  id="inputPassword4" placeholder="Patient`s Last Name" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <label for="inputEmail4" class="col-form-label">Date Of Birth</label>
+                                                    <input type="text" required="required" value="<?php echo $row->pat_dob;?>" name="pat_dob" class="form-control" id="inputEmail4" placeholder="DD/MM/YYYY" readonly>
                                                 </div>
                                                 <div class="form-group col-md-2">
-                                                    <label for="inputBed" class="col-form-label">Bed Number</label>
-                                                    <input type="number" value="<?php echo $row->bednumber;?>" class="form-control" name="pat_bed" id="inputBed" placeholder="Patient's Bed number">
+                                                    <label for="inputPassword4" class="col-form-label">Age</label>
+                                                    <input required="required" type="text" value="<?php echo $row->pat_age;?>" name="pat_age" class="form-control"  id="inputPassword4" placeholder="Patient`s Age" readonly>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="inputAddress" class="col-form-label">Sex</label>
+                                                    <input required="required" type="text" value="<?php echo $row->pat_sex;?>" class="form-control" name="pat_sex" id="inputAddress" placeholder="Patient's Gender" readonly>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputAddress" class="col-form-label">Address</label>
+                                                    <input required="required" type="text" value="<?php echo $row->pat_addr;?>" class="form-control" name="pat_addr" id="inputAddress" placeholder="Patient's Addresss" readonly>
                                                 </div>
                                             </div>
-                                            
-                                            
-
+                                            <hr>
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
-                                                    <label for="inputCity" class="col-form-label">Mobile Number</label>
-                                                    <input required="required" type="text" value="<?php echo $row->pat_phone;?>" name="pat_phone" class="form-control" id="inputCity">
+                                                    <label for="pat_diagnosis" class="col-form-label">Diagnosis</label>
+                                                    <textarea required="required" name="pat_diagnosis" class="form-control" id="pat_diagnosis" rows="10" cols="23" style="resize:none" placeholder="Diagnosis for patient"><?php echo $row->pat_diagnosis;?></textarea>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="inputCity" class="col-form-label">Ailment</label>
-                                                    <input required="required" type="text" value="<?php echo $row->pat_ailment;?>" name="pat_ailment" class="form-control" id="inputCity">
+                                                    <label for="nurse_instruction" class="col-form-label">Nurse Instruction</label>
+                                                    <textarea required="required" name="nurse_instruction" class="form-control" id="nurse_instruction" rows="10" cols="23" style="resize:none" placeholder="Instruction for nurse"><?php echo $row->nurse_instruction;?></textarea>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="inputState" class="col-form-label">Patient's Type</label>
-                                                    <select id="inputState" required="required" name="pat_type" class="form-control">
-                                                        <option>choose</option>
-                                                        <option>InPatient</option>
-                                                        <option>OutPatient</option>
-                                                    </select>
+                                                    <label for="pat_instruction" class="col-form-label">Patient Instruction</label>
+                                                    <textarea required="required" name="pat_instruction" class="form-control" id="pat_instruction" rows="10" cols="23" style="resize:none" placeholder="Instruction for patient"><?php echo $row->pat_instruction;?></textarea>
                                                 </div>
-                                                
                                             </div>
 
                                             <button type="submit" name="update_patient" class="ladda-button btn btn-success" data-style="expand-right">Update Patient</button>

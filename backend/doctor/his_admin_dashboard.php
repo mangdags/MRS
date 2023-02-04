@@ -107,7 +107,7 @@
                             <!--End InPatients-->
 
                             <!--Start Employees-->
-                            <div class="col-md-6 col-xl-4">
+                            <!-- <div class="col-md-6 col-xl-4">
                                 <div class="widget-rounded-circle card-box">
                                     <div class="row">
                                         <div class="col-6">
@@ -119,20 +119,20 @@
                                             <div class="text-right">
                                                 <?php
                                                     //code for summing up number of employees in the certain Hospital 
-                                                    $result ="SELECT count(*) FROM his_admin where ad_id != '1' ";
-                                                    $stmt = $mysqli->prepare($result);
-                                                    $stmt->execute();
-                                                    $stmt->bind_result($doc);
-                                                    $stmt->fetch();
-                                                    $stmt->close();
+                                                    // $result ="SELECT count(*) FROM his_admin where ad_id != '1' ";
+                                                    // $stmt = $mysqli->prepare($result);
+                                                    // $stmt->execute();
+                                                    // $stmt->bind_result($doc);
+                                                    // $stmt->fetch();
+                                                    // $stmt->close();
                                                 ?>
                                                 <h3 class="text-dark mt-1"><span data-plugin="counterup"><?php echo $doc;?></span></h3>
                                                 <p class="text-muted mb-1 text-truncate">Hospital Employees</p>
                                             </div>
                                         </div>
-                                    </div> <!-- end row-->
+                                    </div>  end row-->
                                 </div> <!-- end widget-rounded-circle-->
-                            </div> <!-- end col-->
+                            </div> 
                             <!--End Employees-->
                         
                         </div>
@@ -147,7 +147,7 @@
 
                         
                         <!--Recently Employed Employees-->
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-xl-12">
                                 <div class="card-box">
                                     <h4 class="header-title mb-3">Hospital Employees</h4>
@@ -212,7 +212,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div> <!-- end col -->                                                                                                                                                                                                                                         
+                            </div> end col -->                                                                                                                                                                                                                                         
                         </div>
                         <!-- end row -->
                         

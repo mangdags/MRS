@@ -89,11 +89,11 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="his_admin_patient_lab_test.php">Patient Lab Tests</a>
+                                        <a href="his_admin_patient_lab_test.php">Request Lab Test</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="his_admin_patient_lab_result.php">Patient Lab Results</a>
-                                    </li>
+                                    </li> -->
                                     <!-- <li>
                                         <a href="his_admin_patient_lab_vitals.php">Patient Vitals</a>
                                     </li>
