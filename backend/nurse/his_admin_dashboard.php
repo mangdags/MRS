@@ -105,36 +105,6 @@
                                 </div> <!-- end widget-rounded-circle-->
                             </div> <!-- end col-->
                             <!--End InPatients-->
-
-                            <!--Start Employees-->
-                            <div class="col-md-6 col-xl-4">
-                                <div class="widget-rounded-circle card-box">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="avatar-lg rounded-circle bg-soft-primary border-primary border">
-                                                <i class="mdi mdi-doctor font-22 avatar-title text-primary"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="text-right">
-                                                <?php
-                                                    //code for summing up number of employees in the certain Hospital 
-                                                    $result ="SELECT count(*) FROM his_admin where ad_id != '1' ";
-                                                    $stmt = $mysqli->prepare($result);
-                                                    $stmt->execute();
-                                                    $stmt->bind_result($doc);
-                                                    $stmt->fetch();
-                                                    $stmt->close();
-                                                ?>
-                                                <h3 class="text-dark mt-1"><span data-plugin="counterup"><?php echo $doc;?></span></h3>
-                                                <p class="text-muted mb-1 text-truncate">Hospital Employees</p>
-                                            </div>
-                                        </div>
-                                    </div> <!-- end row-->
-                                </div> <!-- end widget-rounded-circle-->
-                            </div> <!-- end col-->
-                            <!--End Employees-->
-                        
                         </div>
 
                         <div class="row">
@@ -143,79 +113,6 @@
                             <!--End Pharmaceuticals-->
 
                         </div>
-                        
-
-                        
-                        <!--Recently Employed Employees-->
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card-box">
-                                    <h4 class="header-title mb-3">Hospital Employees</h4>
-
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless table-hover table-centered m-0">
-
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Department</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <?php
-                                                $ret="SELECT * FROM his_admin ORDER BY RAND() LIMIT 10 "; 
-                                                //sql code to get to ten docs  randomly
-                                                $stmt= $mysqli->prepare($ret) ;
-                                                $stmt->execute() ;//ok
-                                                $res=$stmt->get_result();
-                                                $cnt=1;
-                                                while($row=$res->fetch_object())
-                                                {
-                                            ?>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <?php echo $row->ad_fname;?> <?php echo $row->ad_lname;?>
-                                                    </td>    
-                                                    <td>
-                                                        <?php echo $row->ad_email;?>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                            if (($row->status) == 2) {
-                                                                echo 'Doctor';
-                                                            }
-                                                            elseif (($row->status) == 3)  {
-                                                                echo 'Nurse';
-                                                            }
-                                                            elseif (($row->status) == 4){
-                                                                echo 'Medical Record';
-                                                            }
-                                                            elseif (($row->status) == 5){
-                                                                echo 'Laboratory';
-                                                            }
-                                                            elseif (($row->status) == 6){
-                                                                echo 'Front Desk';
-                                                            }
-                                                            else{
-                                                                echo 'No Assign Department';
-                                                            }
-                                                        ?>
-                                                    </td>
-                                                    <td>
-                                                        <a href="his_admin_view_single_employee.php?doc_id=<?php echo $row->doc_id;?>&&doc_number=<?php echo $row->doc_number;?>" class="btn btn-xs btn-primary"><i class="mdi mdi-eye"></i> View</a>
-                                                    </td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-                                                </tr>
-                                            </tbody>
-                                            <?php }?>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->                                                                                                                                                                                                                                         
-                        </div>
-                        <!-- end row -->
-                        
                     </div> <!-- container -->
 
                 </div> <!-- content -->

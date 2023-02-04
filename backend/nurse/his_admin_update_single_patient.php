@@ -2,10 +2,13 @@
 <?php
 	session_start();
 	include('assets/inc/config.php');
+
 		if(isset($_POST['update_patient']))
 		{
-            date_default_timezone_set('Asia/Manila');
             $pat_number=$_GET['pat_id'];
+
+            date_default_timezone_set('Asia/Manila');
+            $date = date("Y/m/d h:i:sa");
 			$pat_type = $_POST['pat_type'];
             $condition_arrival = $_POST['condition_arrival'];
             $pat_temp = $_POST['pat_temp'];
@@ -26,6 +29,7 @@
             $pat_ailment = $_POST['pat_ailment'];
             $pat_ward = $_POST['pat_ward'];
             $pat_bed = $_POST['pat_bed'];
+            $vit_number = $_POST['vit_number'];
 
             //sql to insert captured values
 
@@ -33,6 +37,14 @@
 
 			$stmt = $mysqli->prepare($query);
 			$stmt->execute();
+
+            $query="INSERT INTO  his_vitals  (vit_number, vit_pat_number, vit_bodytemp, vit_heartpulse, vit_resprate, vit_bloodpress) VALUES(?,?,?,?,?,?)";
+			$stmt = $mysqli->prepare($query);
+			$rc=$stmt->bind_param('ssssss', $vit_number, $pat_number, $pat_temp, $pat_pulse, $pat_resp_rate, $pat_bp);
+            if($pat_number != $_POST['pat_number']) {
+			    $stmt->execute();
+            }
+            
 			/*
 			*Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
 			*echo"<script>alert('Successfully Created Account Proceed To Log In ');</script>";
@@ -179,7 +191,7 @@
 <html lang="en">
     <!--Head-->
     <?php include('assets/inc/head.php');?>
-    <body>
+    <body onload="setDefaultValue()">
 
         <!-- Begin page -->
         <div id="wrapper">
@@ -227,9 +239,8 @@
                             $stmt->bind_param('i',$pat_number);
                             $stmt->execute() ;//ok
                             $res=$stmt->get_result();
-                            //$cnt=1;
-                            while($row=$res->fetch_object())
-                            {
+                            
+                            while($row=$res->fetch_object()) {
                         ?>
                         <div class="row">
                             <div class="col-12">
@@ -237,14 +248,23 @@
                                     <div class="card-body">
                                         <!--Add Patient Form-->
                                         <form method="post">
+                                            <div class="form-group col-md-2" style="display:none">
+                                                <?php 
+                                                    $length = 5;    
+                                                    $vit_no =  substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+                                                ?>
+                                                <label for="inputZip" class="col-form-label">Vital Number</label>
+                                                <input type="text" name="vit_number" value="<?php echo $vit_no;?>" class="form-control" id="inputZip">
+                                            </div>
+
                                             <input type="hidden" name="fname" value="<?php echo $row->pat_fname;?>">
                                             <input type="hidden" name="mname" value="<?php echo $row->pat_mname;?>">
                                             <input type="hidden" name="lname" value="<?php echo $row->pat_lname;?>">
                                             <input type="hidden" name="dob" value="<?php echo $row->pat_dob;?>">
                                             <input type="hidden" name="age" value="<?php echo $row->pat_age;?>">
                                             <input type="hidden" name="address" value="<?php echo $row->pat_addr;?>">
-                                            <input type="hidden" name="ward" value="<?php echo $row->pat_ward;?>">
-                                            <input type="hidden" name="bed" value="<?php echo $row->bednumber;?>">
+                                            <input type="hidden" name="pat_ward" value="<?php echo $row->pat_ward;?>">
+                                            <input type="hidden" name="pat_bed" value="<?php echo $row->pat_bed;?>">
                                             <input type="hidden" name="mobile" value="<?php echo $row->pat_phone;?>">
                                             <input type="hidden" name="ailment" value="<?php echo $row->pat_ailment;?>">
                                             <input type="hidden" name="pat_type" value="<?php echo $row->pat_type;?>">
@@ -267,6 +287,11 @@
                                             <input type="hidden" name="pat_ailment" value="<?php echo $row->pat_ailment;?>">
                                             <input type="hidden" name="condition_discharge" value="<?php echo $row->pat_ward;?>">
                                             <input type="hidden" name="pat_ailment" value="<?php echo $row->pat_ward;?>">
+                                            <input type="hidden" name="pat_number" value="<?php echo $row->pat_number;?>">
+                                            
+                                            <input type="hidden" name="pat_ty" value="<?php echo $row->pat_number;?>">
+
+                                            
                                         
 
                                             <div class="form-row">
@@ -328,19 +353,12 @@
                                                 <div class="form-group col-md-2">
                                                     
                                                     <label for="temp_method" class="col-form-label">Method</label>
-                                                    <?php 
-                                                        if($row->temp_method < 0) {
-                                                            echo '<select id="temp_method" required="required" name="temp_method" class="form-control">
-                                                                <option>Choose</option>
-                                                                <option value="Axilla">Axilla</option>
-                                                                <option value="Oral">Oral</option>
-                                                                <option value="Anal">Anal</option>
-                                                            </select>';
-                                                        } else {
-                                                            echo '<input type="text" name="temp_method" value="'. $row->temp_method .'" class="form-control">';
-                                                        }
-                                                    ?>
-                                                    
+                                                    <select id="temp_method" required="required" name="temp_method" class="form-control">
+                                                        <option>Choose</option>
+                                                        <option value="Axilla">Axilla</option>
+                                                        <option value="Oral">Oral</option>
+                                                        <option value="Anal">Anal</option>
+                                                    </select>';
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <label for="pat_pulse" class="col-form-label">Pulse</label>
@@ -390,7 +408,7 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="plan" class="col-form-label">Plan</label>
-                                                    <textarea required="required" name="plan" class="form-control" id="plan" rows="7" cols="23" style="resize:none"><?php echo $row->plan;?></textarea>
+                                                    <textarea name="plan" class="form-control" id="plan" rows="7" cols="23" style="resize:none"><?php echo $row->plan;?></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -436,60 +454,41 @@
                                                         <option value="OutPatient">OutPatient</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-row">
-                                                <div class="form-group col-md-5">
-                                                    <label for="inputWard" class="col-form-label">Ward Number</label>
-                                                    <select id="pat_ward" name="pat_ward" class="form-control" onchange="fetchData()">
-                                                        <?php
-                                                            $qry = "SELECT * FROM his_ward WHERE is_full = '1'";
-                                                            $stmt = $mysqli->prepare($qry);
-                                                            // $stmt->bind_param('i', $value);
-                                                            $stmt->execute();
-                                                            $result = $stmt->get_result();
-                                                            while($row=$result->fetch_object()) {
-                                                                echo '<option value='.$row->ward_id .'>'. $row->ward_id .'</option>';
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group col-md-5">
-                                                    <label for="inputBed" class="col-form-label">Bed Number</label>
-                                                    <select id="pat_bed" name="pat_bed" class="form-control">
-                                                    </select>
-                                                </div>
-
-                                                
-                                                        <!-- <?php
-                                                            // $qry = "SELECT * FROM his_bed WHERE is_taken = '1'";
-                                                            // $stmt = $mysqli->prepare($qry);
-                                                            // $stmt->execute();
-                                                            // $result = $stmt->get_result();
-                                                            // while($row=$result->fetch_object()) {
-                                                            //     echo '<option value='.$row->bed_id .'>'. $row->bed_id .'</option>';
-                                                            // }
-                                                        ?> -->
-
-                                                <?php 
-                                                    if (isset($_POST["selectedValue"])) {
-                                            
-                                                        // fetch the data from the database
-                                                        $selectedValue = $_POST["selectedValue"];
-                                                        $stmt = $conn->prepare("SELECT * FROM his_bed WHERE ward_number = ?");
-                                                        $stmt->bind_param("s", $selectedValue);
-                                                        $stmt->execute();
-                                                        $result = $stmt->get_result();
-                                            
-                                                        // return the data as a JSON array
-                                                        $data = array();
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            $data[] = $row;
-                                                        }
-                                                        echo json_encode($data);
-                                                    }
-                                                ?>
                                             </div>
-                                            </div>
+                                            <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputWard" class="col-form-label">Ward Number</label>
+                                                        <select id="pat_ward" name="pat_ward" class="form-control">
+                                                            <?php
+                                                                $qry = "SELECT * FROM his_ward WHERE is_full = '1'";
+                                                                $stmt = $mysqli->prepare($qry);
+                                                                // $stmt->bind_param('i', $value);
+                                                                $stmt->execute();
+                                                                $result = $stmt->get_result();
+                                                                while($row=$result->fetch_object()) {
+                                                                    echo '<option value='.$row->ward_id .'>'. $row->ward_id .'</option>';
+                                                                }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputBed" class="col-form-label">Bed Number</label>
+                                                        <select id="pat_bed" name="pat_bed" class="form-control">
+                                                            <?php 
+                                                                // fetch the data from the database
+                                                                $qry = "SELECT * FROM his_bed WHERE is_taken = '1'";
+                                                                $stmt = $mysqli->prepare($qry);
+                                                                // $stmt->bind_param('i', $value);
+                                                                $stmt->execute();
+                                                                $result = $stmt->get_result();
+                                                                while($row=$result->fetch_object()) {
+                                                                    echo '<option value='.$row->bed_id .'>'. $row->bed_id .'</option>';
+                                                                }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
                                             <div class="form-group col-md-2" style="display:none">
                                                 <?php 
@@ -545,6 +544,73 @@
 
         <!-- Buttons init js-->
         <script src="assets/js/pages/loading-btn.init.js"></script>
+
+        <script>
+            window.onload = function() {
+                function setDefaultValue() {
+                    let condition_arrival = document.getElementsByName("condition_arrival")[0].value;
+                    let disposition = document.getElementsByName("disposition")[0].value;
+                    let temp_method = document.getElementsByName("temp_method")[0].value;
+                    let condition_discharge = document.getElementsByName("condition_discharge")[0].value;
+                    let pat_type = document.getElementsByName("pat_type")[0].value;
+                    let pat_ward = document.getElementsByName("pat_ward")[0].value;
+                    let pat_bed = document.getElementsByName("pat_bed")[0].value;
+
+
+                    let arrival_options = document.querySelectorAll("#condition_arrival option");
+                    let disposition_options = document.querySelectorAll("#disposition option");
+                    let temp_method_options = document.querySelectorAll("#temp_method option");
+                    let condition_discharge_options = document.querySelectorAll("#condition_discharge option");
+                    let pat_type_options = document.querySelectorAll("#pat_type option");
+                    let pat_ward_options = document.querySelectorAll("#pat_ward option");
+                    let pat_bed_options = document.querySelectorAll("#pat_bed option");
+
+                    for (let i = 0; i < arrival_options.length; i++) {
+                        if (arrival_options[i].value === condition_arrival) {
+                            arrival_options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (let i = 0; i < disposition_options.length; i++) {
+                        if (disposition_options[i].value === disposition) {
+                            disposition_options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (let i = 0; i < temp_method_options.length; i++) {
+                        if (temp_method_options[i].value === temp_method) {
+                            temp_method_options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (let i = 0; i < condition_discharge_options.length; i++) {
+                        if (condition_discharge_options[i].value === condition_discharge) {
+                            condition_discharge_options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (let i = 0; i < pat_type_options.length; i++) {
+                        if (pat_type_options[i].value === pat_type) {
+                            pat_type_options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (let i = 0; i < pat_ward_options.length; i++) {
+                        if (pat_ward_options[i].value === pat_ward) {
+                            pat_ward_options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (let i = 0; i < pat_bed_options.length; i++) {
+                        if (pat_bed_options[i].value === pat_bed) {
+                            pat_bed_options[i].selected = true;
+                            break;
+                        }
+                    }
+                }
+                setDefaultValue();
+            };
+        </script>
     </body>
 
 </html>
