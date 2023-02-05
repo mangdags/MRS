@@ -30,20 +30,19 @@
             $pat_ward = $_POST['pat_ward'];
             $pat_bed = $_POST['pat_bed'];
             $vit_number = $_POST['vit_number'];
-
+            $patient_number = $_POST['patient_number'];
+            $attending_doctor = $_POST['attending_doctor'];
             //sql to insert captured values
 
-			$query = "UPDATE his_patients SET pat_type='$pat_type', condition_arrival='$condition_arrival', pat_temp='$pat_temp', temp_method='$temp_method', pat_pulse='$pat_pulse', pat_bp='$pat_bp', pat_cardiac_rate='$pat_cardiac_rate', pat_resp_rate='$pat_resp_rate', pat_weight='$pat_weight', pat_curr_medication='$pat_curr_medication', pat_physical_findings='$pat_physical_findings', pat_diagnosis='$pat_diagnosis', plan='$plan', nurse_note='$nurse_note', date_time_disposition='$date_time_disposition', disposition='$disposition', condition_discharge='$condition_discharge', pat_ailment='$pat_ailment', pat_ward='$pat_ward', pat_bed='$pat_bed' WHERE pat_id='$pat_number'";
+			$query = "UPDATE his_patients SET pat_type='$pat_type', condition_arrival='$condition_arrival', pat_temp='$pat_temp', temp_method='$temp_method', pat_pulse='$pat_pulse', pat_bp='$pat_bp', pat_cardiac_rate='$pat_cardiac_rate', pat_resp_rate='$pat_resp_rate', pat_weight='$pat_weight', pat_curr_medication='$pat_curr_medication', pat_physical_findings='$pat_physical_findings', pat_diagnosis='$pat_diagnosis', plan='$plan', nurse_note='$nurse_note', date_time_disposition='$date_time_disposition', disposition='$disposition', condition_discharge='$condition_discharge', pat_ailment='$pat_ailment', pat_ward='$pat_ward', pat_bed='$pat_bed', attending_doctor='$attending_doctor' WHERE pat_id='$pat_number'";
 
 			$stmt = $mysqli->prepare($query);
 			$stmt->execute();
 
-            $query="INSERT INTO  his_vitals  (vit_number, vit_pat_number, vit_bodytemp, vit_heartpulse, vit_resprate, vit_bloodpress) VALUES(?,?,?,?,?,?)";
-			$stmt = $mysqli->prepare($query);
-			$rc=$stmt->bind_param('ssssss', $vit_number, $pat_number, $pat_temp, $pat_pulse, $pat_resp_rate, $pat_bp);
-            if($pat_number != $_POST['pat_number']) {
-			    $stmt->execute();
-            }
+            $query = "UPDATE his_vitals SET vit_bodytemp=?, vit_heartpulse=?, vit_resprate=?, vit_bloodpress=?, vit_number=? WHERE vit_pat_number=?";
+            $stmt = $mysqli->prepare($query);
+            $rc = $stmt->bind_param('ssssss', $pat_temp, $pat_pulse, $pat_resp_rate, $pat_bp, $vit_number, $patient_number);
+            $stmt->execute();
             
 			/*
 			*Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
@@ -175,6 +174,12 @@
                     $stmt = $mysqli->prepare($query);
                     $stmt->execute();
                 }
+                if ($attending_doctor != $_POST['attending_doctor']) {
+                    $changes = 'Change patient doctor<br>from '.$_POST['attending_doctor'].'<br> to '.$attending_doctor.'';
+                    $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id','$date')";
+                    $stmt = $mysqli->prepare($query);
+                    $stmt->execute();
+                }
 
 				$success = "Patient Details Updated";
 			}
@@ -250,6 +255,7 @@
                                         <form method="post">
                                             <div class="form-group col-md-2" style="display:none">
                                                 <?php 
+                                                    $patient_number = $row->pat_number;
                                                     $length = 5;    
                                                     $vit_no =  substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
                                                 ?>
@@ -257,6 +263,7 @@
                                                 <input type="text" name="vit_number" value="<?php echo $vit_no;?>" class="form-control" id="inputZip">
                                             </div>
 
+                                            
                                             <input type="hidden" name="fname" value="<?php echo $row->pat_fname;?>">
                                             <input type="hidden" name="mname" value="<?php echo $row->pat_mname;?>">
                                             <input type="hidden" name="lname" value="<?php echo $row->pat_lname;?>">
@@ -288,11 +295,8 @@
                                             <input type="hidden" name="condition_discharge" value="<?php echo $row->pat_ward;?>">
                                             <input type="hidden" name="pat_ailment" value="<?php echo $row->pat_ward;?>">
                                             <input type="hidden" name="pat_number" value="<?php echo $row->pat_number;?>">
-                                            
-                                            <input type="hidden" name="pat_ty" value="<?php echo $row->pat_number;?>">
-
-                                            
-                                        
+                                            <input type="hidden" name="patient_number" value="<?php echo $row->pat_number;?>">
+                                            <input type="hidden" name="attending_doctor" value="<?php echo $row->attending_doctor;?>">
 
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
@@ -404,7 +408,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label for="pat_diagnosis" class="col-form-label">Diagnosis</label>
-                                                    <textarea name="pat_diagnosis" class="form-control" id="pat_diagnosis" rows="7" cols="23" style="resize:none"><?php echo $row->pat_diagnosis;?></textarea>
+                                                    <textarea name="pat_diagnosis" class="form-control" id="pat_diagnosis" rows="7" cols="23" style="resize:none" readonly><?php echo $row->pat_diagnosis;?></textarea>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="plan" class="col-form-label">Plan</label>
@@ -488,15 +492,31 @@
                                                             ?>
                                                         </select>
                                                     </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputBed" class="col-form-label">Assign Doctor</label>
+                                                        <select id="attending_doctor" name="attending_doctor" class="form-control">
+                                                            <?php 
+                                                                // fetch the data from the database
+                                                                $qry = "SELECT * FROM his_docs";
+                                                                $stmt = $mysqli->prepare($qry);
+                                                                // $stmt->bind_param('i', $value);
+                                                                $stmt->execute();
+                                                                $result = $stmt->get_result();
+                                                                while($row=$result->fetch_object()) {
+                                                                    echo '<option value="'. $row->doc_lname. ', '.$row->doc_fname.'">'. $row->doc_lname. ', '.$row->doc_fname.'</option>';
+                                                                }
+                                                            ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
 
                                             <div class="form-group col-md-2" style="display:none">
                                                 <?php 
                                                     $length = 5;    
-                                                    $patient_number =  substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+                                                    $rand_patnumber =  substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
                                                 ?>
                                                 <label for="inputZip" class="col-form-label">Patient Number</label>
-                                                <input type="text" name="pat_number" value="<?php echo $patient_number;?>" class="form-control" id="inputZip">
+                                                <input type="text" name="patient_number" value="<?php echo $patient_number;?>" class="form-control" id="inputZip">
                                             </div>
 
                                             <button type="submit" name="update_patient" class="ladda-button btn btn-success" data-style="expand-right">Update Patient</button>
@@ -555,7 +575,7 @@
                     let pat_type = document.getElementsByName("pat_type")[0].value;
                     let pat_ward = document.getElementsByName("pat_ward")[0].value;
                     let pat_bed = document.getElementsByName("pat_bed")[0].value;
-
+                    let attending_doctor = document.getElementsByName("attending_doctor")[0].value;
 
                     let arrival_options = document.querySelectorAll("#condition_arrival option");
                     let disposition_options = document.querySelectorAll("#disposition option");
@@ -564,6 +584,7 @@
                     let pat_type_options = document.querySelectorAll("#pat_type option");
                     let pat_ward_options = document.querySelectorAll("#pat_ward option");
                     let pat_bed_options = document.querySelectorAll("#pat_bed option");
+                    let attending_doctor_options = document.querySelectorAll("#attending_doctor option");
 
                     for (let i = 0; i < arrival_options.length; i++) {
                         if (arrival_options[i].value === condition_arrival) {
@@ -604,6 +625,12 @@
                     for (let i = 0; i < pat_bed_options.length; i++) {
                         if (pat_bed_options[i].value === pat_bed) {
                             pat_bed_options[i].selected = true;
+                            break;
+                        }
+                    }
+                    for (let i = 0; i < attending_doctor_options.length; i++) {
+                        if (attending_doctor_options[i].value === attending_doctor) {
+                            attending_doctor_options[i].selected = true;
                             break;
                         }
                     }

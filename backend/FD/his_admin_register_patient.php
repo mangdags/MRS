@@ -12,7 +12,6 @@
             $pat_lname = $_POST['pat_lname'];
             $pat_number = $_POST['pat_number'];
             $pat_phone = $_POST['pat_phone'];
-            $pat_type = $_POST['pat_type'];
             $pat_addr = $_POST['pat_addr'];
             $pat_age = $_POST['pat_age'];
             $pat_dob = $_POST['pat_dob'];
@@ -25,28 +24,21 @@
             $notified_authority = $_POST['notified_authority'];
             $brought_by = $_POST['brought_by'];
             $brought_by_mobile = $_POST['brought_by_mobile'];
-            $condition_arrival = $_POST['condition_arrival'];
-            $pat_temp = $_POST['pat_temp'];
-            $temp_method = $_POST['temp_method'];
-            $pat_pulse = $_POST['pat_pulse'];
-            $pat_bp = $_POST['pat_bp'];
-            $pat_cardiac_rate = $_POST['pat_cardiac_rate'];
-            $pat_resp_rate = $_POST['pat_resp_rate'];
-            $pat_weight = $_POST['pat_weight'];
-            $pat_curr_medication = $_POST['pat_curr_medication'];
-            $pat_physical_findings = $_POST['pat_physical_findings'];
-            $pat_diagnosis = $_POST['pat_diagnosis'];
-            $plan = $_POST['plan'];
-            $nurse_note = $_POST['nurse_note'];
-            $date_time_disposition = $_POST['date_time_disposition'];
-            $disposition = $_POST['disposition'];
-            $condition_discharge = $_POST['condition_discharge'];
-            $pat_ailment = $_POST['pat_complaint'];
 
-            $query = "INSERT INTO his_patients (pat_fname, pat_lname, pat_dob, pat_age, pat_number, pat_addr, wardnumber, bednumber, pat_phone, pat_type, pat_date_joined, pat_ailment, pat_discharge_status, status, pat_mname, pat_sex, pat_civil_status, pat_nationality, pat_employer, pat_employer_mobile, notified_authority, brought_by, brought_by_mobile, condition_arrival, pat_temp, temp_method, pat_pulse, pat_bp, pat_cardiac_rate, pat_resp_rate, pat_weight, pat_curr_medication, pat_physical_findings, pat_diagnosis, plan, nurse_note, date_time_disposition, disposition, condition_discharge)
-            VALUES ('$pat_fname', '$pat_lname', '$pat_dob', '$pat_age', '$pat_number', '$pat_addr', '', '', '$pat_phone', '$pat_type', '$date', '$pat_ailment', '', '1', '$pat_mname', '$pat_sex', '$pat_civil_status', '$pat_nationality', '$pat_employer', '$pat_employer_mobile', '$notified_authority', '$brought_by', '$brought_by_mobile', '$condition_arrival', '$pat_temp', '$temp_method', '$pat_pulse', '$pat_bp', '$pat_cardiac_rate', '$pat_resp_rate', '$pat_weight', '$pat_curr_medication', '$pat_physical_findings', '$pat_diagnosis', '$plan', '$nurse_note', '$date_time_disposition', '$disposition', '$condition_discharge')";
+            // $query = "INSERT INTO his_patients (pat_fname, pat_lname, pat_dob, pat_age, pat_number, pat_addr, wardnumber, bednumber, pat_phone, pat_date_joined, pat_discharge_status, status, pat_mname, pat_sex, pat_civil_status, pat_nationality, pat_employer, pat_employer_mobile, notified_authority, brought_by, brought_by_mobile)
+            // VALUES ('$pat_fname', '$pat_lname', '$pat_dob', '$pat_age', '$pat_number', '$pat_addr', '', '', '$pat_phone', '$date', '', '1', '$pat_mname', '$pat_sex', '$pat_civil_status', '$pat_nationality', '$pat_employer', '$pat_employer_mobile', '$notified_authority', '$brought_by', '$brought_by_mobile')";
+
+            $query = "INSERT INTO his_patients (pat_fname, pat_lname, pat_dob, pat_age, pat_number, pat_addr, pat_ward, pat_bed, pat_phone, pat_type, pat_date_joined, pat_ailment, pat_discharge_status, status, pat_mname, pat_sex, pat_civil_status, pat_nationality, pat_employer, pat_employer_mobile, notified_authority, brought_by, brought_by_mobile, condition_arrival, pat_temp, temp_method, pat_pulse, pat_bp, pat_cardiac_rate, pat_resp_rate, pat_weight, pat_curr_medication, pat_physical_findings, pat_diagnosis, plan, nurse_note, date_time_disposition, disposition, condition_discharge, attending_doctor, nurse_instruction, pat_instruction)
+            VALUES ('$pat_fname', '$pat_lname', '$pat_dob', '$pat_age', '$pat_number', '$pat_addr', DEFAULT, DEFAULT, '$pat_phone', DEFAULT, '$date', DEFAULT, DEFAULT, '1', '$pat_mname', '$pat_sex', '$pat_civil_status', '$pat_nationality', '$pat_employer', '$pat_employer_mobile', '$notified_authority', '$brought_by', '$brought_by_mobile', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
             
             $stmt = $mysqli->prepare($query);
+            $stmt->execute();
+
+            $value = '0';
+
+            $query="INSERT INTO his_vitals (vit_number, vit_pat_number, vit_bodytemp, vit_heartpulse, vit_resprate, vit_bloodpress) VALUES(?,?,?,?,?,?)";
+            $stmt = $mysqli->prepare($query);
+            $rc=$stmt->bind_param('ssssss', $value, $pat_number, $value, $value, $value, $value);
             $stmt->execute();
 
             /*
@@ -239,130 +231,6 @@
                                                     <input required="required" type="tel" name="brought_by_mobile" class="form-control" id="brought_by_mobile" placeholder="Mobile Number ">
                                                 </div>
                                             </div>
-                                            <hr>
-                                            <!-- <div class="form-row">
-                                                <div class="form-group col-md-4">
-                                                    <label for="condition_arrival" class="col-form-label">Condition on Arrival</label>
-                                                    <select id="condition_arrival" required="required" name="condition_arrival" class="form-control">
-                                                        <option>Choose</option>
-                                                        <option value="Good">Good</option>
-                                                        <option value="Fair">Fair</option>
-                                                        <option value="Poor">Poor</option>
-                                                        <option value="Shock">Shock</option>
-                                                        <option value="Comatose">Comatose</option>
-                                                        <option value="Hemorrhagic">Hemorrhagic</option>
-                                                        <option value="DOA">DOA</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="pat_temp" class="col-form-label">Temperature</label>
-                                                    <input required="required" type="text" pattern="[0-9]*" name="pat_temp" class="form-control" id="pat_temp" title="Only numbers are allowed">
-                                                    
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="temp_method" class="col-form-label">Method</label>
-                                                    <select id="temp_method" required="required" name="temp_method" class="form-control">
-                                                        <option>Choose</option>
-                                                        <option value="Axilla">Axilla</option>
-                                                        <option value="Oral">Oral</option>
-                                                        <option value="Anal">Anal</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="pat_pulse" class="col-form-label">Pulse</label>
-                                                    <input required="required" type="text" name="pat_pulse" class="form-control" id="pat_pulse">
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="pat_bp" class="col-form-label">BP</label>
-                                                    <input required="required" type="text" name="pat_bp" class="form-control" id="pat_bp">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="form-group col-md-2">
-                                                    <label for="pat_cardiac_rate" class="col-form-label">Cardiac Rate</label>
-                                                    <input required="required" type="text" name="pat_cardiac_rate" class="form-control" id="pat_cardiac_rate">
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="pat_resp_rate" class="col-form-label">Respiratory Rate</label>
-                                                    <input required="required" type="text" name="pat_resp_rate" class="form-control" id="pat_resp_rate">
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="pat_weight" class="col-form-label">Weight</label>
-                                                    <input required="required" type="text" name="pat_weight" class="form-control" id="pat_weight">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="form-group col-md-4">
-                                                    <label for="pat_complaint" class="col-form-label">Chief Complaint</label>
-                                                    <textarea required="required" name="pat_complaint" class="form-control" id="pat_complaint" rows="7" cols="23" style="resize:none"></textarea>
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="pat_curr_medication" class="col-form-label">Current Medication</label>
-                                                    <textarea required="required" name="pat_curr_medication" class="form-control" id="pat_curr_medication" rows="7" cols="23" style="resize:none"></textarea>
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="pat_physical_findings" class="col-form-label">Physical Findings</label>
-                                                    <textarea required="required" name="pat_physical_findings" class="form-control" id="pat_physical_findings" rows="7" cols="23" style="resize:none"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="pat_diagnosis" class="col-form-label">Diagnosis</label>
-                                                    <textarea name="pat_diagnosis" class="form-control" id="pat_diagnosis" rows="7" cols="23" style="resize:none"></textarea>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="plan" class="col-form-label">Plan</label>
-                                                    <textarea required="required" name="plan" class="form-control" id="plan" rows="7" cols="23" style="resize:none"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12">
-                                                    <label for="nurse_note" class="col-form-label">Nurse's Notes</label>
-                                                    <textarea required="required" name="nurse_note" class="form-control" id="nurse_note" rows="9" cols="23" style="resize:none"></textarea>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-3">
-                                                    <label for="date_time_disposition" class="col-form-label">Date and Time of Disposition</label>
-                                                    <input type="datetime-local" name="date_time_disposition" class="form-control" id="date_time_disposition">
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                    <label for="disposition" class="col-form-label">Disposition</label>
-                                                    <select id="disposition" name="disposition" class="form-control">
-                                                        <option>Choose</option>
-                                                        <option value="Treated and Sent Home">Treated and Sent Home</option>
-                                                        <option value="For Admission">For Admission</option>
-                                                        <option value="Transferred/Referred">Transferred/Referred</option>
-                                                        <option value="Abscended">Abscended</option>
-                                                        <option value="Refused Admission">Refused Admission</option>
-                                                        <option value="HAMA/DAMA/HPR">HAMA/DAMA/HPR</option>
-                                                        <option value="Out When Called">Out When Called</option>
-                                                        <option value="Died">Died</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                    <label for="condition_discharge" class="col-form-label">Condition on Discharge</label>
-                                                    <select id="condition_discharge" name="condition_discharge" class="form-control">
-                                                        <option>Choose</option>
-                                                        <option value="Died">Stable</option>
-                                                        <option value="Died">Clinical</option>
-                                                        <option value="Died">Expired</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                    <label for="inputState" class="col-form-label">Patient's Type</label>
-                                                    <select id="inputState" required="required" name="pat_type" class="form-control">
-                                                        <option>Choose</option>
-                                                        <option value="InPatient">InPatient</option>
-                                                        <option value="OutPatient">OutPatient</option>
-                                                    </select>
-                                                </div>
-                                            </div> -->
-
                                             <div class="form-group col-md-2" style="display:none">
                                                 <?php 
                                                     $length = 5;    
