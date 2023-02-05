@@ -2,7 +2,7 @@
 <?php
 	session_start();
 	include('assets/inc/config.php');
-		if(isset($_POST['assaign_dept']))
+		if(isset($_POST['assign_dept']))
 		{
             $ad_id = $_GET['ad_id'];
             $doc_dept = $_POST['doc_dept'];
@@ -75,7 +75,6 @@
                         <!-- end page title --> 
                         <!-- Form row -->
                         <?php
-                            echo $_GET['ad_id'];
                             $ret="SELECT  * FROM his_admin WHERE ad_id =?";
                             $stmt= $mysqli->prepare($ret) ;
                             $stmt->bind_param('i',$_GET['ad_id'] );
@@ -120,7 +119,7 @@
                                                     </select>
                                             </div>                                         
 
-                                            <button type="submit" name="assaign_dept" class="ladda-button btn btn-success" data-style="expand-right">Assign Department</button>
+                                            <button type="submit" name="assign_dept" class="ladda-button btn btn-success" data-style="expand-right">Assign Department</button>
 
                                         </form>
                                         <!--End Patient Form-->

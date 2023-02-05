@@ -164,7 +164,7 @@
                                                 </tr>
                                             </thead>
                                             <?php
-                                                $ret="SELECT * FROM his_admin ORDER BY RAND() LIMIT 10 "; 
+                                                $ret="SELECT * FROM his_admin"; 
                                                 //sql code to get to ten docs  randomly
                                                 $stmt= $mysqli->prepare($ret) ;
                                                 $stmt->execute() ;//ok
@@ -204,7 +204,7 @@
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        <a href="his_admin_view_single_employee.php?doc_id=<?php echo $row->doc_id;?>&&doc_number=<?php echo $row->doc_number;?>" class="btn btn-xs btn-primary"><i class="mdi mdi-eye"></i> View</a>
+                                                        <a href="his_admin_view_single_employee.php?ad_id=<?php echo $row->ad_id;?>" class="btn btn-xs btn-primary"><i class="mdi mdi-eye"></i> View</a>
                                                     </td>                                                       
                                                 </tr>
                                             </tbody>

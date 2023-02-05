@@ -2,18 +2,25 @@
 <?php
 	session_start();
 	include('assets/inc/config.php');
-		if(isset($_POST['add_doc']))
+		if(isset($_POST['add_employee']))
 		{
 			$doc_fname=$_POST['doc_fname'];
 			$doc_lname=$_POST['doc_lname'];
 			$doc_number=$_POST['doc_number'];
             $doc_email=$_POST['doc_email'];
             $doc_pwd=sha1(md5($_POST['doc_pwd']));
-            $status = 7;
-            //sql to insert captured values
-			$query="INSERT INTO his_admin (ad_fname, ad_lname, ad_email, ad_pwd, status) values('$doc_fname','$doc_lname','$doc_email','$doc_pwd','$status')";
-			$stmt = $mysqli->prepare($query);
-			$stmt->execute();
+
+            // if(isset($_POST['doc_dpic'])){
+                $ad_dpic=$_FILES["doc_dpic"]["name"];
+                move_uploaded_file($_FILES["doc_dpic"]["tmp_name"],"assets/images/users/".$_FILES["doc_dpic"]["name"]);
+            // }
+
+			$selectedValue = $_POST['selectedValue'];
+
+            $query="INSERT INTO his_admin (ad_fname, ad_lname, ad_email, ad_pwd, ad_dpic, status) values('$doc_fname','$doc_lname','$doc_email','$doc_pwd', '$ad_dpic', '$selectedValue')";
+            $stmt = $mysqli->prepare($query);
+            $stmt->execute();
+
 			/*
 			*Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
 			*echo"<script>alert('Successfully Created Account Proceed To Log In ');</script>";
@@ -82,8 +89,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="header-title">Fill all fields</h4>
-                                        <!--Add Patient Form-->
-                                        <form method="post">
+                                        <!--Add Employee Form-->
+                                        <form method="post" enctype="multipart/form-data">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label for="inputEmail4" class="col-form-label">First Name</label>
@@ -95,7 +102,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-md-2" style="display:none">
+                                                <div class="form-group col-md-2" style="display:none">
                                                     <?php 
                                                         $length = 5;    
                                                         $patient_number =  substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
@@ -103,21 +110,42 @@
                                                     <label for="inputZip" class="col-form-label">Doctor Number</label>
                                                     <input type="text" style="text-transform: capitalize;" name="doc_number" value="<?php echo $patient_number;?>" class="form-control" id="inputZip">
                                                 </div>
-
-                                            <div class="form-group">
-                                                <label for="inputAddress" class="col-form-label">Email</label>
-                                                <input required="required" style="text-transform: capitalize;" type="email" class="form-control" name="doc_email" id="inputAddress">
+                                            
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputAddress" class="col-form-label">Email</label>
+                                                    <input required="required" style="text-transform: capitalize;" type="email" class="form-control" name="doc_email" id="inputAddress">
+                                                </div>
+                                                
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputCity" class="col-form-label">Password</label>
+                                                    <input required="required" style="text-transform: capitalize;" type="password" name="doc_pwd" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="dept_id" class="col-form-label">Department</label>
+                                                    <select required="required" name="selectedValue" class="form-control" id="dept_id">
+                                                        <?php
+                                                            $query = "SELECT id, department FROM tbluser";
+                                                            $stmt = $mysqli->prepare($query);
+                                                            $stmt->execute();
+                                                            $result = $stmt->get_result();
+                                                            
+                                                            while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value=". $row["id"] .">" . $row["department"] . "</option>";
+                                                            }
+                                                        ?>
+                                                    </select>
+                                                </div>
                                             </div>
 
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="inputCity" class="col-form-label">Password</label>
-                                                    <input required="required" style="text-transform: capitalize;" type="password" name="doc_pwd" class="form-control" id="inputCity">
+                                                    <label for="doc_dpic" class="col-form-label">Profile Picture</label>
+                                                    <input required="required"  type="file" name="doc_dpic" class="btn btn-success form-control"  id="doc_dpic">
                                                 </div>
-                                                
                                             </div>
 
-                                            <button type="submit" name="add_doc" class="ladda-button btn btn-success" data-style="expand-right">Add Employee</button>
+                                            <button type="submit" name="add_employee" class="ladda-button btn btn-success" data-style="expand-right">Add Employee</button>
 
                                         </form>
                                         <!--End Patient Form-->
@@ -161,6 +189,19 @@
 
         <!-- Buttons init js-->
         <script src="assets/js/pages/loading-btn.init.js"></script>
+
+        <script>
+            $("#dept_id").change(function() {
+                const selectedValue = $(this).val();
+                $.ajax({
+                type: 'POST',
+                data: { selectedValue: selectedValue },
+                success: function(response) {
+                    console.log(response);
+                }
+                });
+            });
+        </script>
         
     </body>
 
