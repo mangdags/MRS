@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2023 at 11:19 AM
+-- Generation Time: Feb 05, 2023 at 03:30 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -75,7 +75,8 @@ INSERT INTO `his_admin` (`ad_id`, `ad_fname`, `ad_lname`, `ad_email`, `ad_pwd`, 
 (6, 'Front', 'Desk', 'frontdesk@gmail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', NULL, 6),
 (17, 'Another', 'Employee', 'testemployee@email.com', 'adcd7048512e64b48da55b027577886ee5a36350', '114-1146025_vector-cats-simple-transparent-background-cat-vector-png.png', 7),
 (40, 'Laboratory', 'Staff', 'laboratory@mail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', '114-1146025_vector-cats-simple-transparent-background-cat-vector-png.png', 5),
-(41, 'Medical', 'Record', 'medical@mail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', 'doctor_admin_icon_4-512.png', 4);
+(41, 'Medical', 'Record', 'medical@mail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', 'doctor_admin_icon_4-512.png', 4),
+(42, 'IT', 'Personnel', 'itpersonnel@mail.com', 'fe703d258c7ef5f50b71e06565a65aa07194907f', 'feature4.png', 8);
 
 -- --------------------------------------------------------
 
@@ -196,7 +197,8 @@ INSERT INTO `his_audit` (`id`, `changes`, `user_id`, `date`) VALUES
 (166, 'Change Prescription of First Last<br> Changes:  To  ', 41, '2023/02/05 02:42:05pm'),
 (167, 'Change Prescription of First Last<br> Changes:  To  ', 41, '2023/02/05 02:42:51pm'),
 (168, 'Change Prescription of First Last<br> Changes: Prescription To <p>Prescription will go here</p>', 41, '2023/02/05 02:43:22pm'),
-(169, 'Add medical record of New Patient', 41, '2023/02/05 02:45:27pm');
+(169, 'Add medical record of New Patient', 41, '2023/02/05 02:45:27pm'),
+(170, 'Add patient <br>Name: Test Last', 6, '2023-02-05T12:23');
 
 -- --------------------------------------------------------
 
@@ -406,7 +408,8 @@ INSERT INTO `his_patients` (`pat_id`, `pat_fname`, `pat_mname`, `pat_lname`, `pa
 (28, 'New', 'Test', 'Patient', '2023-02-05', '10', 'Male', 'Child', 'FILIPINO', 'OJ7VH', 'Outer Space', NULL, NULL, '1231412312', NULL, '1223-12-02T12:12', NULL, NULL, 1, 'None', '0', 'Yes', 'Police', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (29, 'New', 'T', 'Patient', '2023-02-05', '15', 'Male', 'Child', 'FILIPINO', 'GR0LI', 'Outer Space', NULL, NULL, '1231412312', NULL, '2312-12-31T12:03', NULL, NULL, 1, 'None', '0', 'Yes', 'Police', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (31, 'New', 'Test', 'Patient', '2023-02-05', '25', 'Male', 'Child', 'FILIPINO', '1DFHZ', 'Outer Space', '1', '9', '1231412312', 'Choose', '0003-12-12T21:02', 'Complaint', NULL, 1, 'None', '0', 'Yes', 'Relatives', '0', 'Good', '50000.00', 'Axilla', '100.00', '100/90', '100.00', '100.00', '55.00', 'Medication', 'Findings', '', 'Plan', 'NOtes', '0000-00-00 00:00:00', 'Choose', 'Choose', NULL, NULL, NULL),
-(32, 'Another', 'Middle', 'Name', '2023-02-05', '30', 'Male', 'Child', 'FILIPINO', 'WHSPL', 'Outer Space', '2', '11', '1231412312', 'Choose', '1212-12-23T12:31', 'A', NULL, 1, 'None', '0', 'Yes', 'Relatives', '0', 'Good', '200.00', 'Oral', '123.00', '110/90', '100.00', '123.00', '55.00', 'A', 'A', '', 'A', 'AAA', '0000-00-00 00:00:00', 'Choose', 'Choose', 'Strange, Stephen', NULL, NULL);
+(32, 'Another', 'Middle', 'Name', '2023-02-05', '30', 'Male', 'Child', 'FILIPINO', 'WHSPL', 'Outer Space', '2', '11', '1231412312', 'Choose', '1212-12-23T12:31', 'A', NULL, 1, 'None', '0', 'Yes', 'Relatives', '0', 'Good', '200.00', 'Oral', '123.00', '110/90', '100.00', '123.00', '55.00', 'A', 'A', '', 'A', 'AAA', '0000-00-00 00:00:00', 'Choose', 'Choose', 'Strange, Stephen', NULL, NULL),
+(33, 'Test', 'Middle', 'Last', '2023-02-05', '0', 'Male', 'Single', 'Fil', 'XRGJC', 'Address', NULL, NULL, '123123123123', NULL, '2023-02-05T12:23', NULL, NULL, 1, '12323', '123123', 'Yes', 'Self', '123123123123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -642,7 +645,8 @@ INSERT INTO `his_vitals` (`vit_id`, `vit_number`, `vit_pat_number`, `vit_bodytem
 (45, 'F1GTD', '30', '55', '55', '123', '100/90', '2023-02-05 01:44:56.710812'),
 (46, 'F1GTD', '30', '55', '55', '123', '100/90', '2023-02-05 01:46:36.358775'),
 (47, '6I5Q3', '1DFHZ', '50000.00', '100.00', '100.00', '100/90', '2023-02-05 02:16:48.432319'),
-(48, 'PAGWT', 'WHSPL', '200.00', '123.00', '123.00', '110/90', '2023-02-05 02:37:26.785183');
+(48, 'PAGWT', 'WHSPL', '200.00', '123.00', '123.00', '110/90', '2023-02-05 02:37:26.785183'),
+(49, '0', 'XRGJC', '0', '0', '0', '0', '2023-02-05 11:21:34.697025');
 
 -- --------------------------------------------------------
 
@@ -685,7 +689,8 @@ INSERT INTO `tbluser` (`id`, `department`) VALUES
 (3, 'Nurse'),
 (4, 'Medical Records'),
 (5, 'Laboratory'),
-(6, 'Front Desk');
+(6, 'Front Desk'),
+(8, 'IT');
 
 --
 -- Indexes for dumped tables
@@ -831,7 +836,7 @@ ALTER TABLE `his_accounts`
 -- AUTO_INCREMENT for table `his_admin`
 --
 ALTER TABLE `his_admin`
-  MODIFY `ad_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ad_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `his_assets`
@@ -843,7 +848,7 @@ ALTER TABLE `his_assets`
 -- AUTO_INCREMENT for table `his_audit`
 --
 ALTER TABLE `his_audit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- AUTO_INCREMENT for table `his_bed`
@@ -879,7 +884,7 @@ ALTER TABLE `his_medical_records`
 -- AUTO_INCREMENT for table `his_patients`
 --
 ALTER TABLE `his_patients`
-  MODIFY `pat_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `pat_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `his_patient_transfers`
@@ -933,7 +938,7 @@ ALTER TABLE `his_vendor`
 -- AUTO_INCREMENT for table `his_vitals`
 --
 ALTER TABLE `his_vitals`
-  MODIFY `vit_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `vit_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `his_ward`
@@ -945,7 +950,7 @@ ALTER TABLE `his_ward`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
