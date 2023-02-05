@@ -167,12 +167,12 @@
                                     <li>
                                         <a href="his_admin_patient_lab_result.php">Patient Lab Results</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="his_admin_patient_lab_vitals.php">Patient Vitals</a>
-                                    </li>
-                                    <li>
+                                    </li> -->
+                                    <!-- <li>
                                         <a href="his_admin_employee_lab_vitals.php">Employee Vitals</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="his_admin_lab_report.php">Lab Reports</a>
                                     </li>
