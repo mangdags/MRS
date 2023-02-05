@@ -61,6 +61,9 @@
                 elseif($getuser['status']=="6") {
                      header("Location: backend/FD/his_admin_dashboard.php");
                 }
+                elseif($getuser['status']=="8") {
+                     header("Location: backend/IT/his_admin_dashboard.php");
+                }
             } 
             else{
                 $err = "Access Denied Please Check Your Credentials";

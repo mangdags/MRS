@@ -27,17 +27,7 @@
                                         <a href="his_admin_add_employee.php">Add Employee</a>
                                     </li>
                                     <li>
-                                        <a href="his_admin_view_employee.php">View Employees</a>
-                                    </li>
-                                    <li>
                                         <a href="his_admin_manage_employee.php">Manage Employees</a>
-                                    </li>
-                                    <hr>
-                                    <li>
-                                        <a href="his_admin_assaign_dept.php">Assign Department</a>
-                                    </li>
-                                    <li>
-                                        <a href="his_admin_transfer_employee.php">Transfer Employee</a>
                                     </li>
                                 </ul>
                             </li>
@@ -46,18 +36,6 @@
                                     <i class="fe-airplay"></i>
                                     <span> Audit </span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="fas fa-lock"></i>
-                                    <span> Password Resets </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li>
-                                        <a href="his_admin_manage_password_resets.php">Manage</a>
-                                    </li>                             
-                                </ul>
                             </li>
                         </ul>
 

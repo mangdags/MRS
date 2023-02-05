@@ -39,7 +39,7 @@
                             <div class="col-12">
                                 <div class="page-title-box">
                                     
-                                    <h4 class="page-title">Medical Record System (Admin Dashboard)</h4>
+                                    <h4 class="page-title">Medical Record System (IT Dashboard)</h4>
                                 </div>
                             </div>
                         </div>     
@@ -145,76 +145,6 @@
                         </div>
                         
 
-                        
-                        <!--Recently Employed Employees-->
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card-box">
-                                    <h4 class="header-title mb-3">Hospital Employees</h4>
-
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless table-hover table-centered m-0">
-
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Department</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <?php
-                                                $ret="SELECT * FROM his_admin"; 
-                                                //sql code to get to ten docs  randomly
-                                                $stmt= $mysqli->prepare($ret) ;
-                                                $stmt->execute() ;//ok
-                                                $res=$stmt->get_result();
-                                                $cnt=1;
-                                                while($row=$res->fetch_object())
-                                                {
-                                            ?>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <?php echo $row->ad_fname;?> <?php echo $row->ad_lname;?>
-                                                    </td>    
-                                                    <td>
-                                                        <?php echo $row->ad_email;?>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                            if (($row->status) == 2) {
-                                                                echo 'Doctor';
-                                                            }
-                                                            elseif (($row->status) == 3)  {
-                                                                echo 'Nurse';
-                                                            }
-                                                            elseif (($row->status) == 4){
-                                                                echo 'Medical Record';
-                                                            }
-                                                            elseif (($row->status) == 5){
-                                                                echo 'Laboratory';
-                                                            }
-                                                            elseif (($row->status) == 6){
-                                                                echo 'Front Desk';
-                                                            }
-                                                            else{
-                                                                echo 'No Assign Department';
-                                                            }
-                                                        ?>
-                                                    </td>
-                                                    <td>
-                                                        <a href="his_admin_view_single_employee.php?ad_id=<?php echo $row->ad_id;?>" class="btn btn-xs btn-primary"><i class="mdi mdi-eye"></i> View</a>
-                                                    </td>                                                       
-                                                </tr>
-                                            </tbody>
-                                            <?php }?>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->                                                                                                                                                                                                                                         
-                        </div>
-                        <!-- end row -->
                         
                     </div> <!-- container -->
 
