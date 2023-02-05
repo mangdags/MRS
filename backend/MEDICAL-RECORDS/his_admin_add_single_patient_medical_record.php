@@ -64,7 +64,7 @@
             <!-- ============================================================== -->
             <?php
                 $pat_number = $_GET['pat_number'];
-                $ret="SELECT  * FROM his_patients WHERE pat_number=?";
+                $ret="SELECT * FROM his_patients WHERE pat_number=?";
                 $stmt= $mysqli->prepare($ret) ;
                 $stmt->bind_param('s',$pat_number);
                 $stmt->execute() ;//ok
@@ -160,8 +160,8 @@
                                                     {
                                                 ?>
                                                 <div class="form-group">
-                                                        <label for="inputAddress" class="col-form-label">Patient's Prescription</label>
-                                                        <textarea required="required"  type="text" class="form-control" name="mdr_pat_prescr" id="inputAddress"><?php echo $row->pres_ins;?> </textarea>
+                                                        <label for="mdr_pat_prescr" class="col-form-label">Patient's Prescription</label>
+                                                        <textarea required="required"  type="text" class="form-control" name="mdr_pat_prescr" id="mdr_pat_prescr"><?php echo $row->pres_ins;?> </textarea>
                                                 </div>
                                                 <?php }?>
 

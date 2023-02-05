@@ -17,33 +17,32 @@
                                 
                             </li>
 
-                           <!-- <li>
+                           <li>
                                 <a href="javascript: void(0);">
                                     <i class="fab fa-accessible-icon "></i>
                                     <span> Patients </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li>
+                                    <!-- <li>
                                         <a href="his_admin_register_patient.php">Register Patient</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="his_admin_view_patients.php">View Patients</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="his_admin_manage_patient.php">Manage Patients</a>
-                                    </li>
-                                    <hr>
-                                    <li>
+                                    </li> -->
+                                    <!-- <li>
                                         <a href="his_admin_discharge_patient.php">Discharge Patients</a>
                                     </li>
                                     <li>
                                         <a href="his_admin_patient_transfer.php">Patient Transfers</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
 
-                            <li>
+                            <!-- <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-doctor"></i>
                                     <span> Employees </span>
@@ -67,9 +66,9 @@
                                         <a href="his_admin_transfer_employee.php">Transfer Employee</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
 
-                            <li>
+                            <!-- <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-pill"></i>
                                     <span> Pharmacy </span>
@@ -106,9 +105,9 @@
                                         <a href="his_admin_manage_presc.php">Manage Prescriptions</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                 
-                            <li>
+                            <!-- <li>
                                 <a href="javascript: void(0);">
                                     <i class="fe-share"></i>
                                     <span> Reporting </span>
@@ -135,7 +134,7 @@
                                     </li>
                                     
                                 </ul>
-                            </li>-->
+                            </li> -->
 
                             <li>
                                 <a href="javascript: void(0);">

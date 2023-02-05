@@ -4,30 +4,6 @@
   include('assets/inc/checklogin.php');
   check_login();
   $aid=$_SESSION['ad_id'];
-  if(isset($_GET['delete_eqp']))
-  {
-        date_default_timezone_set('Asia/Manila');
-        $date = date("Y/m/d h:i:sa");
-        $id=($_GET['delete_eqp']);
-        $adn = "UPDATE his_equipments SET status = 0 where eqp_code='$id'";
-        $stmt= $mysqli->prepare($adn);
-        $stmt->execute();
-        $stmt->close();	 
-  
-          if($stmt)
-          {
-            $id_user = $_SESSION['ad_id'];
-            $changes = 'Delete Lab Equipment with code of  '.$id.'';
-            $query = "INSERT INTO his_audit(changes, user_id, date) VALUES('$changes','$id_user','$date')";
-            $stmt = $mysqli->prepare($query);
-            $stmt->execute();
-            $success = "Equipment Deleted";
-          }
-            else
-            {
-                $err = "Try Again Later";
-            }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -65,11 +41,11 @@
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Laboratory</a></li>
-                                            <li class="breadcrumb-item active">Manage Laboratory Equipment</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Patients</a></li>
+                                            <li class="breadcrumb-item active">View Patients</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Manage Laboratory Equipments</h4>
+                                    <h4 class="page-title">Patient Details</h4>
                                 </div>
                             </div>
                         </div>     
@@ -103,10 +79,11 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th data-toggle="true">Name</th>
-                                                <th data-hide="phone">Vendor</th>
-                                                <th data-hide="phone">Barcode</th>
-                                                <th data-hide="phone">Status</th>
-                                                <th data-hide="phone">Quantity</th>
+                                                <th data-hide="phone">Number</th>
+                                                <th data-hide="phone">Address</th>
+                                                <th data-hide="phone">Phone</th>
+                                                <th data-hide="phone">Age</th>
+                                                <th data-hide="phone">Category</th>
                                                 <th data-hide="phone">Action</th>
                                             </tr>
                                             </thead>
@@ -115,7 +92,8 @@
                                                 *get details of allpatients
                                                 *
                                             */
-                                                $ret="SELECT * FROM  his_equipments WHERE status = 1"; 
+                                                $ret="SELECT * FROM  his_patients where status = 1 ORDER BY RAND() "; 
+                                                //sql code to get to ten docs  randomly
                                                 $stmt= $mysqli->prepare($ret) ;
                                                 $stmt->execute() ;//ok
                                                 $res=$stmt->get_result();
@@ -127,17 +105,14 @@
                                                 <tbody>
                                                 <tr>
                                                     <td><?php echo $cnt;?></td>
-                                                    <td><?php echo $row->eqp_name;?></td>
-                                                    <td><?php echo $row->eqp_vendor;?></td>
-                                                    <td><?php echo $row->eqp_code;?></td>
-                                                    <td><?php echo $row->eqp_status;?></td>
-                                                    <td><?php echo $row->eqp_qty;?></td>
-                                                    <td>
-                                                        <a href="his_admin_view_single_eqp.php?eqp_code=<?php echo $row->eqp_code;?>" class="badge badge-success"><i class="far fa-eye "></i> View</a>
-                                                        <a href="his_admin_update_single_eqp.php?eqp_code=<?php echo $row->eqp_code;?>" class="badge badge-warning"><i class="fas fa-clipboard-check "></i> Update</a>
-                                                        <a href="his_admin_manage_lab_equipment.php?delete_eqp=<?php echo $row->eqp_code;?>" class="badge badge-danger"><i class="fas fa-trash-alt "></i> Delete</a>
-
-
+                                                    <td><?php echo $row->pat_fname;?> <?php echo $row->pat_lname;?></td>
+                                                    <td><?php echo $row->pat_number;?></td>
+                                                    <td><?php echo $row->pat_addr;?></td>
+                                                    <td><?php echo $row->pat_phone;?></td>
+                                                    <td><?php echo $row->pat_age;?> Years</td>
+                                                    <td><?php echo $row->pat_type;?></td>
+                                                    
+                                                    <td><a href="his_admin_view_single_patient.php?pat_id=<?php echo $row->pat_id;?>&&pat_number=<?php echo $row->pat_number;?>" class="badge badge-success"><i class="mdi mdi-eye"></i> View</a>
                                                     </td>
                                                 </tr>
                                                 </tbody>

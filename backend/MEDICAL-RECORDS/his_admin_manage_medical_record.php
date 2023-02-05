@@ -115,7 +115,7 @@
                                                 *get details of allpatients
                                                 *
                                             */
-                                                $ret="SELECT * FROM  his_medical_records where status = 1 ORDER BY RAND() "; 
+                                                $ret="SELECT * FROM  his_medical_records where status = 1 "; 
                                                 //sql code to get to ten docs  randomly
                                                 $stmt= $mysqli->prepare($ret) ;
                                                 $stmt->execute() ;//ok
@@ -135,6 +135,7 @@
                                                     <td><?php echo $row->mdr_pat_age;?> Years</td>
                                                     <td>
                                                         <a href="his_admin_view_single_medical_record.php?mdr_id=<?php echo $row->mdr_id;?>&&mdr_number=<?php echo $row->mdr_number;?>" class="badge badge-success"><i class="fas fa-eye"></i> View</a>
+                                                        <a href="his_admin_print_request.php?mdr_id=<?php echo $row->mdr_id;?>" class="badge badge-success"><i class="fas fa-print "></i> Print</a>
                                                         <a href="his_admin_upate_single_medical_record.php?mdr_number=<?php echo $row->mdr_number;?>" class="badge badge-warning"><i class="fas fa-eye-dropper "></i> Update</a>
                                                         <a href="his_admin_manage_medical_record.php?delete_mdr_number=<?php echo $row->mdr_number;?>" class="badge badge-danger"><i class=" fas fa-trash-alt "></i> Delete</a>
 

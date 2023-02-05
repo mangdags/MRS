@@ -134,11 +134,11 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-md-4">
                                                         <label for="inputEmail4" class="col-form-label">Equipment Name</label>
-                                                        <input type="text" required="required" value="<?php echo $row->eqp_name;?>" name="eqp_name" class="form-control" id="inputEmail4" >
+                                                        <input type="text" required="required" value="<?php echo $row->eqp_name;?>" name="eqp_name" class="form-control" id="inputEmail4" readonly>
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label for="inputPassword4" class="col-form-label">Equipment Vendor</label>
-                                                        <input required="required" type="text" value="<?php echo $row->eqp_vendor;?>" name="eqp_vendor" class="form-control"  id="inputPassword4">
+                                                        <input required="required" type="text" value="<?php echo $row->eqp_vendor;?>" name="eqp_vendor" class="form-control"  id="inputPassword4" readonly>
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label for="inputPassword4" class="col-form-label">Equipment Quantity </label>

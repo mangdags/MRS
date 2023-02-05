@@ -137,7 +137,7 @@
 
                                                 <div class="form-group">
                                                         <label for="inputAddress" class="col-form-label">Laboratory Result</label>
-                                                        <textarea required="required"   type="text" class="form-control" name="lab_pat_results" id="editor1"></textarea>
+                                                        <textarea required="required"   type="text" class="form-control" name="lab_pat_results" id="editor1"><?php echo $row->lab_pat_results;?></textarea>
                                                 </div>
 
                                                 <button type="submit" name="add_patient_lab_result" class="ladda-button btn btn-success" data-style="expand-right">Add Laboratory Result</button>

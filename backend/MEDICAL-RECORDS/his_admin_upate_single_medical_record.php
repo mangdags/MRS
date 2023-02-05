@@ -115,12 +115,12 @@
 
                                                     <div class="form-group col-md-4">
                                                         <label for="inputPassword4" class="col-form-label">Patient Age</label>
-                                                        <input required="required" type="text" readonly name="mdr_pat_age" value="<?php echo $row->mdr_pat_age;?>" class="form-control"  id="inputPassword4" placeholder="Patient`s Last Name">
+                                                        <input required="required" type="text" readonly name="mdr_pat_age" value="<?php echo $row->mdr_pat_age;?>" class="form-control"  id="inputPassword4" placeholder="Patient`s Age">
                                                     </div>
 
                                                     <div class="form-group col-md-4">
                                                         <label for="inputPassword4" class="col-form-label">Patient Address</label>
-                                                        <input required="required" type="text" readonly name="mdr_pat_adr" value="<?php echo $row->mdr_pat_adr;?>" class="form-control"  id="inputPassword4" placeholder="Patient`s Last Name">
+                                                        <input required="required" type="text" readonly name="mdr_pat_adr" value="<?php echo $row->mdr_pat_adr;?>" class="form-control"  id="inputPassword4" placeholder="Patient`s Address">
                                                     </div>
 
                                                 </div>
@@ -129,12 +129,12 @@
 
                                                     <div class="form-group col-md-6">
                                                         <label for="inputEmail4" class="col-form-label">Patient Number</label>
-                                                        <input type="text" required="required" readonly name="mdr_pat_number" value="<?php echo $row->mdr_pat_number;?>" class="form-control" id="inputEmail4" placeholder="DD/MM/YYYY">
+                                                        <input type="text" required="required" readonly name="mdr_pat_number" value="<?php echo $row->mdr_pat_number;?>" class="form-control" id="inputEmail4" placeholder="Patient's Number">
                                                     </div>
 
                                                     <div class="form-group col-md-6">
                                                         <label for="inputPassword4" class="col-form-label">Patient Ailment</label>
-                                                        <input required="required" type="text" readonly  name="mdr_pat_ailment" value="<?php echo $row->mdr_pat_ailment;?>" class="form-control"  id="inputPassword4" placeholder="Patient`s Age">
+                                                        <input required="required" type="text" readonly  name="mdr_pat_ailment" value="<?php echo $row->mdr_pat_ailment;?>" class="form-control"  id="inputPassword4" placeholder="Patient`s Ailment">
                                                     </div>
                                                 </div>
                                                
