@@ -84,22 +84,22 @@
                 </button>
             </li>
 
-            <li class="dropdown d-none d-lg-block">
+            <!-- <li class="dropdown d-none d-lg-block">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     Create New
                     <i class="mdi mdi-chevron-down"></i> 
                 </a>
                 <div class="dropdown-menu">
-                    <!-- item-->
+                     
                     <a href="his_admin_add_employee.php" class="dropdown-item">
                         <i class="fe-users mr-1"></i>
                         <span>Employee</span>
                     </a>
-                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div> -->
 
                     
                 </div>
-            </li>
+            </li> -->
 
         </ul>
     </div>

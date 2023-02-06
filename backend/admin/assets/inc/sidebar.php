@@ -24,20 +24,8 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="his_admin_add_employee.php">Add Employee</a>
-                                    </li>
-                                    <li>
                                         <a href="his_admin_view_employee.php">View Employees</a>
                                     </li>
-                                    <li>
-                                        <a href="his_admin_manage_employee.php">Manage Employees</a>
-                                    </li>
-                                    <hr>
-                                    <li>
-                                        <a href="his_admin_assaign_dept.php">Assign Department</a>
-                                    </li>
-                                    <li>
-                                        <a href="his_admin_transfer_employee.php">Transfer Employee</a>
                                     </li>
                                 </ul>
                             </li>
