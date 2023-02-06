@@ -11,14 +11,14 @@
             $lab_pat_number  = $_POST['lab_pat_number'];
             $lab_pat_tests = $_POST['lab_pat_tests'];
             $lab_number  = $_POST['lab_number'];
-            $doc_dpic=$_FILES["doc_dpic"]["name"];
-            move_uploaded_file($_FILES["doc_dpic"]["tmp_name"],"../image/".$_FILES["doc_dpic"]["name"]);
+            // $doc_dpic=$_FILES["doc_dpic"]["name"];
+            // move_uploaded_file($_FILES["doc_dpic"]["tmp_name"],"../image/".$_FILES["doc_dpic"]["name"]);
             //$pres_number = $_POST['pres_number'];
             //$pres_ins = $_POST['pres_ins'];
             //$pres_pat_ailment = $_POST['pres_pat_ailment'];
             //sql to insert captured values
-			$query="INSERT INTO  his_laboratory  (lab_pat_name, lab_pat_ailment, lab_pat_number, lab_pat_tests, lab_number,image,status ) 
-                                            VALUES('$lab_pat_name','$lab_pat_ailment','$lab_pat_number','$lab_pat_tests','$lab_number','$doc_dpic', 1)";
+			$query="INSERT INTO  his_laboratory  (lab_pat_name, lab_pat_ailment, lab_pat_number, lab_pat_tests, lab_number,status ) 
+                                            VALUES('$lab_pat_name','$lab_pat_ailment','$lab_pat_number','$lab_pat_tests','$lab_number', 1)";
 			$stmt = $mysqli->prepare($query);
 			$stmt->execute();
 			/*
